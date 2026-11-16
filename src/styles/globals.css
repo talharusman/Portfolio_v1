@@ -1,0 +1,180 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens. Documented in DESIGN_SYSTEM.md.
+ * Owner palette is fixed; every other color is a mix of these three.
+ */
+:root {
+  --background: #f4f3ef;
+  --foreground: #0b0b0a;
+  --accent: #0a6b5e;
+  --on-accent: #f4f3ef;
+
+  --muted: color-mix(in srgb, var(--foreground) 62%, var(--background));
+  --rule: color-mix(in srgb, var(--foreground) 16%, var(--background));
+  --surface: color-mix(in srgb, var(--foreground) 4%, var(--background));
+
+  --gutter: clamp(1.25rem, 0.5rem + 3.5vw, 3rem);
+  color-scheme: light;
+}
+
+/* Dark: explicit choice, or system preference when no choice is stored. */
+:root[data-theme="dark"] {
+  --background: #0b0b0a;
+  --foreground: #f4f3ef;
+  --accent: #18a389;
+  --on-accent: #0b0b0a;
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --background: #0b0b0a;
+    --foreground: #f4f3ef;
+    --accent: #18a389;
+    --on-accent: #0b0b0a;
+    color-scheme: dark;
+  }
+}
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+  --color-muted: var(--muted);
+  --color-rule: var(--rule);
+  --color-surface: var(--surface);
+
+  --font-display: var(--font-archivo), system-ui, sans-serif;
+  --font-sans: var(--font-archivo), system-ui, sans-serif;
+  --font-serif: var(--font-source-serif), Georgia, serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  /* Type scale. Display sizes are fluid; text sizes are fixed. */
+  --text-display: clamp(2.75rem, 1.2rem + 7.2vw, 7.5rem);
+  --text-display--line-height: 0.95;
+  --text-display--letter-spacing: -0.035em;
+  --text-hero: clamp(1.875rem, 0.7rem + 5.4vw, 5rem);
+  --text-hero--line-height: 1.02;
+  --text-hero--letter-spacing: -0.02em;
+  --text-h1: clamp(2.25rem, 1.2rem + 4.6vw, 5rem);
+  --text-h1--line-height: 1;
+  --text-h1--letter-spacing: -0.03em;
+  --text-h2: clamp(1.75rem, 1.2rem + 2vw, 2.75rem);
+  --text-h2--line-height: 1.08;
+  --text-h2--letter-spacing: -0.02em;
+  --text-h3: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem);
+  --text-h3--line-height: 1.2;
+  --text-h3--letter-spacing: -0.01em;
+  --text-lead: clamp(1.1875rem, 1.05rem + 0.6vw, 1.5rem);
+  --text-lead--line-height: 1.5;
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.65;
+  --text-small: 0.9375rem;
+  --text-small--line-height: 1.5;
+  --text-label: 0.8125rem;
+  --text-label--line-height: 1.4;
+
+  /* Section rhythm, used as py-section / gap-section. */
+  --spacing-section: clamp(4rem, 2.5rem + 6vw, 9rem);
+  --spacing-gutter: var(--gutter);
+
+  /* Breakpoints. Mobile first. */
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+
+  --container-page: 80rem;
+  --container-measure: 42rem;
+
+  --radius-control: 2px;
+}
+
+@layer base {
+  html {
+    background: var(--background);
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-size: var(--text-small);
+    line-height: var(--text-small--line-height);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: color-mix(in srgb, var(--accent) 18%, transparent);
+  }
+
+  a,
+  button,
+  summary {
+    touch-action: manipulation;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--on-accent);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-delay: 0ms !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* Display lettering: Archivo at an expanded width. */
+@utility font-wide {
+  font-family: var(--font-display);
+  font-stretch: 118%;
+  font-variation-settings: "wdth" 118;
+}
+
+/* Slightly narrower display lettering for long uppercase headlines. */
+@utility font-semiwide {
+  font-family: var(--font-display);
+  font-stretch: 106%;
+  font-variation-settings: "wdth" 106;
+}
+
+/* Architectural grid: faint hairlines on a 40px module. */
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--foreground) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--foreground) 7%, transparent) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* The single page-load moment: elements rise into place, staggered by --reveal-delay. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility reveal {
+  animation: rise 640ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: var(--reveal-delay, 0ms);
+}
