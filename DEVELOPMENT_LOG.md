@@ -119,3 +119,37 @@ Browser review of Phase 1 plus the `web-design-guidelines` audit; owner confirma
 
 ### Remains
 Browser review; owner inputs (availability status, GitHub URLs, screenshots, resume PDF, confirmation of categories, summaries and the diagram path). Then Phase 3 (projects and case studies).
+
+## Phase 3: About page
+
+Phase numbering note: the owner's brief names this phase 3, so About is Phase 3. Projects and case studies move to Phase 4, Skills and Experience to Phase 5, Resume and Contact to Phase 6, interactions to Phase 7 and testing and deployment to Phase 8 (see `TASKS.md`).
+
+**Skills used:** `frontend-design` (invoked at the start; plan stated before building) and `web-design-guidelines` (invoked after the build; the rules fetched earlier in the session were applied, not re-fetched). `vercel-react-best-practices` was not re-invoked: the page is all server components with no new client code.
+
+### Design decisions
+- Stayed inside the existing design system; no new visual style. One new type token (`text-statement`) for the long uppercase headline, and a `statement` variant of `PageHeader` (mono label, uppercase `font-semiwide` headline).
+- "Beyond Development" is a structured ruled list (`SpecList`), not a timeline. A timeline needs dates and none were supplied.
+- Philosophy blocks are numbered 01 to 04 because the brief specifies them; titles are set in uppercase by CSS.
+- Areas of interest use a ruled two-column list, not tags, since they are not technologies.
+- Content lives in `src/data/about.ts`. The background wording is mine, written only from the brief (degree, university, "current academic journey", interest in AI engineering and full-stack development). It states no graduation date, year or employment.
+- "400+ LeetCode problems solved" is included as the competitive programming detail because the owner stated it earlier. The six LeetCode badges are not shown because they were marked as needing verification.
+
+### Files
+- Created: `src/data/about.ts`, `src/sections/{AboutBackground,EngineeringPhilosophy,AreasOfInterest,BeyondDevelopment}.tsx`.
+- Modified: `src/app/about/page.tsx` (replaced the placeholder), `src/components/ui/PageHeader.tsx` (`label`, `statement`), `src/components/ui/SpecList.tsx` (row keys), `src/styles/globals.css` (`--text-statement`).
+
+### Errors and solutions
+| Problem | Solution |
+|---|---|
+| Found before running: `SpecList` keyed rows by term, and two rows share the term "Leadership" (duplicate React keys) | Key is now `term-index` |
+| Audit: the interests list left the right column without a closing line in its last row | Borders moved from the list to each row |
+
+### Tested
+- `npm run lint` and `npm run build` pass.
+- Production server: `/about` returns 200; one `h1`; headings run h1, h2 and h3 in order; all expected content present (label, four philosophy titles, leadership rows, Second Place, 400+ LeetCode, call to action); active nav item has `aria-current`; every internal link returns 200.
+
+### Not tested
+- **No visual check.** Not seen in a browser: headline wrapping at 360px and tablet widths, the two-column background layout at `xl`, the 2x2 philosophy grid, dark mode, and spacing.
+
+### Remains
+Browser review; optional owner details (roles, dates, academic year); confirmation of the background wording. Then Phase 4 (projects and case studies).

@@ -55,4 +55,4 @@ Invoke the skill with the Skill tool before the work, and only say a skill was u
 
 ## Current status
 
-Phases 1 (design system and shell) and 2 (home page) are implemented; lint and build pass. Neither has been reviewed in a browser. `web-design-guidelines` has audited the home page code. Routes other than Home and `/projects/[slug]` are placeholders until their phase. `/design-system` is a development-only reference page (404 in production).
+Phases 1 (design system and shell), 2 (home page) and 3 (About page) are implemented; lint and build pass. None has been reviewed in a browser. `web-design-guidelines` has audited the home and About page code. Routes other than Home, About and `/projects/[slug]` are placeholders until their phase. `/design-system` is a development-only reference page (404 in production).

@@ -122,3 +122,10 @@ Real screenshots and diagrams only. A project without a screenshot gets a typogr
 - New components: `ProjectFeature` (editorial layout, alternates sides), `ProjectFigure` (screenshot, or a labeled "Screenshot to be added" placeholder), and sections `Hero`, `HeroVisual`, `EngineeringOverview`, `FeaturedProjects`, `Capabilities`, `ContactCta`.
 - Availability indicator: a small square marker plus text, shown only when `profile.availability` is set.
 - `Section` accepts `uppercase` for titles the brief sets in capitals.
+
+## About page conventions (Phase 3)
+
+- `PageHeader` has a `statement` variant: mono label above, uppercase `font-semiwide` headline at `text-statement` (clamp 1.75 to 3.75rem, line height 1.06), full width, serif lead below. Use it for pages whose brief gives a long uppercase headline.
+- Numbered principle blocks: a two-column ordered list, each item with a top rule, an accent display number (tabular), an uppercase `h3` and serif body text.
+- Interest lists: ruled rows in two columns, `font-wide` at `text-h3`, no tags (tags are for technologies and disciplines).
+- Facts and affiliations use `SpecList`. Row keys include the index, so terms may repeat.

@@ -47,30 +47,42 @@ Skills used: `frontend-design`, `vercel-react-best-practices` (from Phase 1 and 
 - [ ] Owner confirms: availability status, project categories and summaries, the hero diagram's request path
 - [ ] Owner supplies `public/resume/resume.pdf` (the "Download Resume" link goes to the `/resume` page for now)
 
-## Phase 3: Projects and case studies
+## Phase 3: About (implemented; browser review pending)
+Skills used: `frontend-design`, `web-design-guidelines` (audit, one fix applied).
+- [x] Hero: label, uppercase statement headline and introduction from the brief (`PageHeader` `statement` variant)
+- [x] My background: factual prose and a facts list (BS Artificial Intelligence, FAST-NUCES, Karachi); no dates invented
+- [x] Engineering philosophy: four numbered blocks
+- [x] Areas of interest: seven items from the brief
+- [x] Beyond development: structured list (PROCOM’26 AI Grand Prix, Robotics and Automation Society AI Division, Web Hunt, competitive programming)
+- [x] Closing call to action (reuses `ContactCta`)
+- [x] Lint, build, rendered-HTML and link checks; `web-design-guidelines` audit and fix
+- [ ] **Browser check** (desktop, tablet, mobile; light and dark). Main risk: the long uppercase headline at narrow widths.
+- [ ] Owner supplies, if wanted: role details and dates for PROCOM’26 and the Robotics and Automation Society AI Division, Web Hunt details, current academic year. None are shown until supplied.
+- [ ] Owner confirms the background wording, which I wrote from the brief, and whether to keep "400+ LeetCode problems solved" (LeetCode badges are not shown, pending verification)
+
+## Phase 4: Projects and case studies
 - [ ] Projects index
 - [ ] Case-study template (overview, architecture, implementation, challenges, verified results)
 - [ ] Six case studies with real content (needs owner information)
 - [ ] `generateStaticParams`, metadata, 404 for unknown slugs
 - [ ] Browser check, audit and fixes
 
-## Phase 4: About, Skills, Experience
-- [ ] About (education, positioning, achievements)
+## Phase 5: Skills and Experience
 - [ ] Skills and technical expertise, grouped across Full-Stack and AI equally
 - [ ] Experience and leadership (PROCOM'26, Robotics and Automation Society, Web Hunt, LeetCode once verified)
 - [ ] Browser check, audit and fixes
 
-## Phase 5: Resume and Contact
+## Phase 6: Resume and Contact
 - [ ] Resume page (web version plus PDF download once the file exists)
 - [ ] Contact page (mailto, copy email, profile links, no fake form)
 - [ ] Browser check, audit and fixes
 
-## Phase 6: Interactions and responsiveness
+## Phase 7: Interactions and responsiveness
 - [ ] Motion (hero reveal, scroll reveals, hover states) with reduced-motion support
 - [ ] Tablet and mobile pass on every page
 - [ ] Keyboard and focus pass
 
-## Phase 7: Testing, optimization, deployment prep
+## Phase 8: Testing, optimization, deployment prep
 - [ ] Full audit with `web-design-guidelines` across all pages
 - [ ] Performance review with `vercel-react-best-practices` (images, fonts, bundle, client components)
 - [ ] Metadata, Open Graph, `sitemap`, `robots`, favicon

@@ -12,9 +12,9 @@ type SpecListProps = {
 export function SpecList({ items, className }: SpecListProps) {
   return (
     <dl className={cn("divide-y divide-rule border-y border-rule", className)}>
-      {items.map(({ term, detail }) => (
+      {items.map(({ term, detail }, index) => (
         <div
-          key={term}
+          key={`${term}-${index}`}
           className="grid grid-cols-[6.5rem_1fr] gap-4 py-3 sm:grid-cols-[8rem_1fr]"
         >
           <dt className="pt-0.5 font-mono text-label text-muted">{term}</dt>
