@@ -158,3 +158,14 @@ Real screenshots and diagrams only. A project without a screenshot gets a typogr
 - **Resume sections** reuse `Section`, `SpecList`, `TagList`, `ExperienceEntry` and the date-column list pattern (11rem mono period and location column beside the details).
 - **PDF preview**: a paper-style frame (grid background, bordered page at 17:22) holding the real PDF in an `<object>`, with a download link as fallback content and a labeled placeholder when the file is missing. Download actions use a plain anchor with the `download` attribute; never replace the PDF with an image.
 - `SpecList` rows align term and detail on the first text baseline.
+
+## Responsive and motion conventions (Phase 7)
+
+- **Breakpoints in practice**: the desktop link row and the Previous / Back / Next block use `lg`; section titles take 4 columns at `lg` and 3 from `xl`. Below `lg` everything stacks to one column.
+- **Section titles** never overflow: uppercase titles use `text-[1.375rem]`, all titles allow hyphenation and word breaking, and the title column has `min-w-0`.
+- **Tap targets**: every link and button is at least 44px tall (`min-h-11`); icon buttons are `size-11`. Inline links inside a sentence are exempt.
+- **Page transition** (`app/template.tsx`, class `page-in`): a 320ms opacity fade whenever the route changes.
+- **Section reveal** (`scroll-reveal`): content settles up 16px and fades in over the first 15rem of scroll as it enters the viewport. CSS scroll-driven animation inside `@supports (animation-timeline: view())`, so browsers without it show the content with no animation. Use it on large blocks only (`Section`, project layouts, the closing call to action), never on controls.
+- **Hero reveal** (`reveal` plus `revealDelay`): the one staggered load moment, home page only.
+- **Reduced motion**: transitions and animations shorten to ~0, and `scroll-reveal` is removed entirely (scroll-driven animations ignore duration).
+- **Menu focus**: Escape closes the mobile menu and returns focus to its button.

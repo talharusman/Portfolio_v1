@@ -28,11 +28,11 @@ export function Section({
     <section id={id} aria-labelledby={`${id}-title`} className="border-t border-rule">
       <Container
         className={cn(
-          "grid gap-x-6 gap-y-8 py-section lg:grid-cols-12",
+          "scroll-reveal grid gap-x-6 gap-y-8 py-section lg:grid-cols-12",
           className,
         )}
       >
-        <div className="lg:sticky lg:top-24 lg:col-span-3 lg:self-start lg:pr-6">
+        <div className="min-w-0 lg:sticky lg:top-24 lg:col-span-4 lg:self-start lg:pr-6 xl:col-span-3">
           {number ? (
             <p aria-hidden className="mb-2 font-mono text-label text-accent tabular-nums">
               {number}
@@ -40,15 +40,20 @@ export function Section({
           ) : null}
           <h2
             id={`${id}-title`}
+            // Long single words (such as "Infrastructure") must never overflow the
+            // narrow title column: uppercase titles are set a step smaller, and all
+            // titles may hyphenate as a last resort.
             className={cn(
-              "font-wide text-h3 font-semibold",
-              uppercase && "uppercase",
+              "font-wide font-semibold wrap-break-word hyphens-auto",
+              uppercase
+                ? "text-[1.375rem] leading-[1.15] uppercase"
+                : "text-h3",
             )}
           >
             {title}
           </h2>
         </div>
-        <div className="min-w-0 lg:col-span-9">{children}</div>
+        <div className="min-w-0 lg:col-span-8 xl:col-span-9">{children}</div>
       </Container>
     </section>
   );

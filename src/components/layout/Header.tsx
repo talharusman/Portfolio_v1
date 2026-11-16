@@ -10,7 +10,7 @@ export function Header() {
       <Container className="flex h-16 items-center justify-between gap-6">
         <Link
           href="/"
-          className="font-wide font-semibold tracking-[0.06em] uppercase"
+          className="inline-flex min-h-11 items-center font-wide font-semibold tracking-[0.06em] uppercase"
         >
           {profile.name}
         </Link>

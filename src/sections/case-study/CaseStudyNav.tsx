@@ -11,7 +11,7 @@ export function CaseStudyNav({ slug }: { slug: string }) {
 
   return (
     <nav aria-label="Project navigation" className="border-t border-rule">
-      <Container className="grid gap-x-8 gap-y-6 py-12 md:grid-cols-3">
+      <Container className="grid gap-x-8 gap-y-6 py-12 lg:grid-cols-3">
         <Link href={`/projects/${previous.slug}`} className={linkClass}>
           <span className="flex items-center gap-2 font-mono text-label text-muted">
             <ArrowLeft aria-hidden className="size-4" />
@@ -21,7 +21,7 @@ export function CaseStudyNav({ slug }: { slug: string }) {
             {previous.title}
           </span>
         </Link>
-        <Link href="/projects" className={`${linkClass} md:text-center`}>
+        <Link href="/projects" className={`${linkClass} lg:text-center`}>
           <span className="font-mono text-label text-muted">All Work</span>
           <span className="mt-2 block font-wide text-h3 font-semibold">
             Back to All Projects
@@ -29,9 +29,9 @@ export function CaseStudyNav({ slug }: { slug: string }) {
         </Link>
         <Link
           href={`/projects/${next.slug}`}
-          className={`${linkClass} md:text-right`}
+          className={`${linkClass} lg:text-right`}
         >
-          <span className="flex items-center gap-2 font-mono text-label text-muted md:justify-end">
+          <span className="flex items-center gap-2 font-mono text-label text-muted lg:justify-end">
             Next Project
             <ArrowRight aria-hidden className="size-4" />
           </span>

@@ -11,7 +11,9 @@ export function FeaturedProjects() {
           <h2 id="featured-title" className="font-wide text-h2 font-semibold">
             Selected projects
           </h2>
-          <TextLink href="/projects">All Projects</TextLink>
+          <TextLink href="/projects" className="inline-flex min-h-11 items-center">
+            All Projects
+          </TextLink>
         </div>
         <div>
           {featuredProjects.map((project, index) => (

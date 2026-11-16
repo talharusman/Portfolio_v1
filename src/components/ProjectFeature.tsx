@@ -16,7 +16,7 @@ type ProjectFeatureProps = {
 /** Large editorial project layout used on the home page. Alternates sides. */
 export function ProjectFeature({ project, number, reversed }: ProjectFeatureProps) {
   return (
-    <article className="grid items-center gap-x-10 gap-y-8 border-t border-rule py-12 first:border-t-0 lg:grid-cols-12 lg:py-16">
+    <article className="scroll-reveal grid items-center gap-x-10 gap-y-8 border-t border-rule py-12 first:border-t-0 lg:grid-cols-12 lg:py-16">
       <div className={cn("min-w-0 lg:col-span-7", reversed && "lg:order-last")}>
         <ProjectFigure
           src={project.image}

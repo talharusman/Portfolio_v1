@@ -116,10 +116,23 @@ Skills used: `frontend-design`, `web-design-guidelines` (audit, two fixes applie
 - [ ] Browser-check the PDF preview in a normal browser (headless Chrome shows a black frame because it does not render PDFs)
 - [ ] Known limitations: with JavaScript disabled a submit gives no visible result (a notice says so); there is no rate limiting beyond validation and the honeypot
 
-## Phase 7: Interactions and responsiveness
-- [ ] Motion (hero reveal, scroll reveals, hover states) with reduced-motion support
-- [ ] Tablet and mobile pass on every page
-- [ ] Keyboard and focus pass
+## Phase 7: Interactions and responsiveness (implemented and browser-verified)
+Skills used: `frontend-design`'s system (no new visual style), `web-design-guidelines` (audit, one fix applied).
+- [x] Checked every page at 1440, 768 and 390px (11 routes including an unknown URL): no horizontal overflow, no clipped text, no unreadable text, one `h1` per page, no console errors
+- [x] Fixed the layout bugs the audit found (see the log): case-study title overflow, uppercase section titles overflowing the title column, project navigation clipping at tablet width, label clipping on mobile, undersized tap targets
+- [x] Responsive navigation: link row from `lg` (1024px) up, menu button below it, verified at 1440, 768 and 390
+- [x] Mobile menu: opens below the header with 7 links, Escape closes it, focus returns to the menu button, choosing a link navigates and closes it, current page marked, `overscroll-behavior: contain`
+- [x] Theme switching: follows the system preference, toggle switches to the exact dark palette, one icon shows, choice persists across pages and reloads
+- [x] Project filters: all five filters give the right counts, URL and active chip; Research shows its empty state; All Projects restores the list
+- [x] Project navigation: Next, Previous, wrap-around from the first project, Back to All Projects
+- [x] Hover states: primary and secondary buttons, nav links, theme toggle, filter chips, text links, project case-study links, footer links all change on hover
+- [x] Form validation re-tested at 768 and 390px (empty submit, provider failure, success)
+- [x] Keyboard: skip link appears and moves focus to main; every Tab stop on the home page has a visible focus ring; no focused element sits under the sticky header; the mobile menu works with Tab, Enter and Escape
+- [x] Animations: page fade on every route change, scroll-driven section reveals (CSS only, transform and opacity), one staggered hero reveal; reduced motion removes the scroll reveal and shortens the rest
+- [x] Automated browser checks: 62 interaction checks pass on the final build (scripts are in the session scratchpad, not the repo)
+- [ ] Not verified in a real browser by me: Safari and Firefox (scroll-driven reveals need `animation-timeline`; browsers without it show the content with no animation), a physical phone, screen readers
+- [ ] The Resume page PDF preview (headless Chrome cannot render PDFs)
+- [ ] Decide whether to move the browser test scripts into the repo (for example `scripts/`) so they survive the session; they currently depend on a local Chrome install
 
 ## Phase 8: Testing, optimization, deployment prep
 - [ ] Full audit with `web-design-guidelines` across all pages

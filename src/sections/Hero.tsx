@@ -20,7 +20,7 @@ export function Hero() {
         </p>
         <h1
           id="hero-title"
-          className="reveal mt-6 font-semiwide text-hero font-semibold text-balance uppercase [overflow-wrap:break-word]"
+          className="reveal mt-6 font-semiwide text-hero font-semibold text-balance uppercase wrap-break-word"
           style={revealDelay(100)}
         >
           {headline}

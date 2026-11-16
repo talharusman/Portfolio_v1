@@ -283,3 +283,42 @@ Same design system. Sections reuse the Experience page's components and data (`T
 
 ### Remains
 Configure the mail provider and send a real test message; owner decisions on the flagged conflicts; decide whether to bring more resume content into the site; browser-check the PDF preview. Then Phase 7 (interactions and responsiveness).
+
+## Phase 7: Responsive and interaction pass
+
+**Skills used:** the `frontend-design` system from earlier phases (no new visual style was introduced) and `web-design-guidelines` (invoked after the changes; fresh guidelines fetched). `vercel-react-best-practices` was not re-invoked.
+
+### Method
+Everything was measured in headless Chrome driven over the DevTools protocol (no dependencies installed). One audit script loaded 11 routes at 1440, 768 and 390px and flagged horizontal overflow, elements past the viewport edge, clipped text, text under 12.5px, tap targets under 40px and heading counts. An interaction script then drove the real pages with mouse and keyboard events and asserted behavior. Findings were fixed, then both scripts were run again on the final build. The scripts live in the session scratchpad.
+
+### Bugs found and fixed
+| Found | Fix |
+|---|---|
+| Case-study titles (for example "Next Best Offer Recommendation System") overflowed their 7-column slot at 1440px and ran into the neighboring column | Titles use `text-statement` with `font-semiwide` and break long words if needed |
+| Uppercase section titles (for example "Databases & Infrastructure") overflowed the narrow title column at 1440px | Uppercase titles are one step smaller, titles may hyphenate, the title column is 4 of 12 columns at `lg` and 3 from `xl` |
+| Previous / Next project titles clipped at 768px (three narrow columns) | The three-column block starts at `lg`; below that the links stack |
+| `SpecList` labels such as "Implementation" were wider than the 6.5rem column at 390px | Label column is 7.25rem |
+| Wordmark (23px tall) and the home "All Projects" link were undersized tap targets | Both have a 44px minimum height; the footer links also have a 44px minimum width |
+| Reduced-motion test passed a wrong assertion: the scroll reveal ignored `animation-duration`, so with reduced motion below-fold sections stayed invisible until scrolled | `.scroll-reveal` is `animation: none` under reduced motion; the test now asserts the animation name and opacity |
+| Tall sections stayed faded while read, because the reveal ran over 30% of the section height | The reveal runs over a fixed 15rem scroll distance |
+| Escape from inside the mobile menu left focus on a hidden link | Focus returns to the menu button |
+| Audit finding: the mobile menu sheet allowed scroll chaining | `overscroll-behavior: contain` |
+
+### Motion
+Added `app/template.tsx` (a short fade on every route change) and the `scroll-reveal` utility (CSS scroll-driven animation, `animation-timeline: view()`, wrapped in `@supports`, transform and opacity only) on `Section`, the project layouts and the closing call to action. The hero keeps its one staggered load reveal. Reduced motion disables the reveal and shortens everything else.
+
+### Tested (final build)
+- Responsive audit: all 11 routes at 1440, 768 and 390px, clean (the by-design 1px skip link and a code block scrolling inside its own container are not issues).
+- Interaction suite, 62 of 62 checks: theme (6 checks plus system preference), navigation at three widths, mobile menu at 390 and 768 (open, Escape, focus return, link navigation, current page), five filters plus the empty state and reset, project navigation including wrap-around, eight hover states, keyboard (skip link, tab order and focus rings on the home page, mobile menu by keyboard, sticky header not covering focus), animations (page fade, scroll reveal, hidden below the fold and visible after scrolling, reduced motion), sticky header. Zero console errors.
+- Form validation at 768 and 390px against a mock mail server: errors and focus, honest failure, success.
+- Screenshots viewed: desktop hero with a focus ring, the open mobile menu, tablet home and skills pages.
+
+### Not tested
+Safari, Firefox, a real phone, screen readers, the PDF preview in a normal browser.
+
+### Notes
+- The first tablet screenshots looked blank below the fold. That was the scroll-reveal at scroll position 0, but it exposed the reduced-motion bug above. Layout screenshots now use reduced motion so full pages render.
+- The project listing rows are not clickable surfaces (their links are); the `ProjectEntry` row hover is only in the design-system demo.
+
+### Remains
+Cross-browser and device checks, then Phase 8 (testing, optimization and deployment preparation).

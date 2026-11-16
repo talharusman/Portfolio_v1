@@ -28,7 +28,7 @@ export function PageHeader({ title, lead, label, statement }: PageHeaderProps) {
           className={cn(
             "font-semibold text-balance",
             statement
-              ? "font-semiwide text-statement uppercase [overflow-wrap:break-word] lg:col-span-12"
+              ? "font-semiwide text-statement uppercase wrap-break-word lg:col-span-12"
               : "font-wide text-h1 lg:col-span-10",
           )}
         >

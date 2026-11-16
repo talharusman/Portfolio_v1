@@ -35,7 +35,7 @@ export function Footer() {
               <li key={link.href}>
                 <TextLink
                   href={link.href}
-                  className="inline-flex min-h-11 items-center"
+                  className="inline-flex min-h-11 min-w-11 items-center"
                 >
                   {link.label}
                 </TextLink>

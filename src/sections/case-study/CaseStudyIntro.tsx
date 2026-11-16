@@ -12,7 +12,7 @@ export function CaseStudyIntro({ project }: { project: Project }) {
       <Container className="grid gap-x-8 gap-y-10 pt-16 pb-12 md:pt-24 lg:grid-cols-12">
         <div className="lg:col-span-7">
           <p className="font-mono text-label text-accent">{project.category}</p>
-          <h1 className="mt-4 font-wide text-h1 font-semibold text-balance">
+          <h1 className="mt-4 font-semiwide text-statement font-semibold text-balance wrap-break-word">
             {project.title}
           </h1>
           <p className="mt-6 max-w-measure font-serif text-lead text-muted">

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import type { NavItem } from "@/data/navigation";
@@ -20,11 +20,15 @@ export function MainNav({
 }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (!open) return;
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key !== "Escape") return;
+      setOpen(false);
+      // The panel is about to be hidden; keep keyboard focus on a visible control.
+      buttonRef.current?.focus();
     };
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
@@ -60,6 +64,7 @@ export function MainNav({
         ) : null}
         <ThemeToggle />
         <button
+          ref={buttonRef}
           type="button"
           onClick={() => setOpen((value) => !value)}
           aria-expanded={open}
@@ -80,7 +85,7 @@ export function MainNav({
         aria-label="Main"
         hidden={!open}
         className={cn(
-          "absolute inset-x-0 top-full border-b border-rule bg-background lg:hidden",
+          "absolute inset-x-0 top-full overscroll-contain border-b border-rule bg-background lg:hidden",
         )}
       >
         <ul className="px-gutter py-2">

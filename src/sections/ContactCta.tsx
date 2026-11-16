@@ -8,7 +8,7 @@ export function ContactCta() {
 
   return (
     <section aria-labelledby="cta-title" className="border-t border-rule">
-      <Container className="grid gap-x-6 gap-y-8 py-section lg:grid-cols-12">
+      <Container className="scroll-reveal grid gap-x-6 gap-y-8 py-section lg:grid-cols-12">
         <h2
           id="cta-title"
           className="font-semiwide text-h1 font-semibold text-balance uppercase lg:col-span-9"
