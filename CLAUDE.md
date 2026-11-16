@@ -39,7 +39,8 @@ There is no test runner. Use npm only. Do not run `git init` unless asked.
 
 - Owner colors are fixed: light `#F4F3EF` / `#0B0B0A` / accent `#0A6B5E`; dark `#0B0B0A` / `#F4F3EF` / accent `#18A389`. See `DESIGN_SYSTEM.md` for the forbidden styles.
 - Never invent metrics, user counts, employment history, deployment URLs or links. Use only facts in `PROJECT_CONTEXT.md` or supplied by the owner. Do not describe the owner as "senior".
-- No fake buttons, dead links or fake form success responses.
+- No fake buttons, dead links or fake form success responses. The contact form reports success only when the mail provider accepted the message (`src/lib/contact.ts`); it needs `RESEND_API_KEY` and `CONTACT_TO_EMAIL` (see `.env.example`).
+- The owner's resume (`public/resume/resume.pdf`, mirrored in `src/data/resume.ts` and `src/data/experience.ts`) is the source of truth for experience, dates and figures. Never publish the phone number it contains on a page. Where the resume and an earlier brief disagree, flag it in `TASKS.md` instead of choosing silently.
 - Keep secrets out of source code.
 - Next.js 16 prerendering rejects `new Date()` in server components.
 
@@ -55,4 +56,4 @@ Invoke the skill with the Skill tool before the work, and only say a skill was u
 
 ## Current status
 
-Phases 1 (design system and shell), 2 (home), 3 (About), 4 (Projects and case studies) and 5 (Skills and Experience) are implemented; lint and build pass. None has been reviewed in a browser. `web-design-guidelines` has audited every page built so far. Resume and Contact are placeholders until Phase 6. `/design-system` is a development-only reference page (404 in production).
+Phases 1 to 6 (design system, home, About, Projects and case studies, Skills and Experience, Resume and Contact) are implemented; lint and build pass, and `web-design-guidelines` has audited every page. Phase 6 was the first with a real browser check: headless Chrome is driven over the DevTools protocol with no dependencies (scripts live in the session scratchpad, not the repo), and the contact form was tested end to end against a local mock mail server. Pages other than Contact were captured and only partly inspected. Phase 7 (interactions and responsiveness) is next. `/design-system` is a development-only reference page (404 in production).

@@ -234,3 +234,52 @@ None this phase. My first attempt to extract accent skill names from the HTML us
 
 ### Remains
 Browser review; owner content (experience, dates, responsibilities); PyTorch decision; LeetCode verification. Then Phase 6 (Resume and Contact).
+
+## Phase 6: Resume and Contact pages
+
+**Skills used:** `frontend-design` (invoked at the start) and `web-design-guidelines` (invoked after the build; fresh guidelines fetched; findings fixed). `vercel-react-best-practices` was not re-invoked.
+
+### New owner information and how it was used
+The owner attached their resume and gave their email, GitHub and LinkedIn URLs. The resume is now the source of truth for experience, dates and figures.
+- Applied: contact details (`data/profile.ts`), three technical-experience entries with dates and figures exactly as written, leadership details and the 150% and 50+ participants figures (`data/experience.ts`), PyTorch in the skills list, and a new `data/resume.ts` that mirrors the PDF's summary, education, skills and projects.
+- **Not applied, flagged instead:** conflicts between earlier briefs and the resume (Fake Job stack: Keras and Docker vs Scikit-Learn; Robotics Society role wording; Hospital Management vs Smart Healthcare naming; Redis not in the resume), plus resume content that the site does not use yet (two extra projects, case-study figures, final-year status). Nothing existing was silently overwritten.
+- **Privacy:** the phone number appears only inside the PDF the owner supplied; no page shows it.
+- The PDF was located on disk by its exact name, its extracted text was compared with the attachment (same content), and the identical file was copied to `public/resume/resume.pdf`.
+
+### Contact form design
+- `lib/contact.ts` (self-contained): validation (every message states the fix), configuration check, and `sendContactEmail`, which calls Resend's REST API (no SDK, no new dependency) and returns "sent" only on a 2xx response; otherwise "unavailable" or "failed". Subject and sender lines have line breaks stripped. Secrets come from `RESEND_API_KEY` and `CONTACT_TO_EMAIL`; nothing is logged beyond the provider status code. `RESEND_API_URL` exists only so tests can use a local mock.
+- `app/contact/actions.ts`: server action; trims input, honeypot check, validation, then send. Returns the state the form renders.
+- `ContactForm` (client): `useActionState`, inline errors with focus on the first invalid field, pending label "Sending…", polite live region, `<noscript>` notice, honeypot marked `inert`. Success shows only after the server confirmed delivery.
+- `ContactFormSection` reads the configuration at request time (`connection()` inside `Suspense`), so setting the environment variables takes effect without a rebuild. While unconfigured the fieldset is disabled and the page says so and shows the email address. The Suspense fallback is the disabled form.
+- Found while testing: the server-rendered HTML does not contain field errors or results (React applies the action state on the client), so without JavaScript a submit shows no visible result. Mitigation: the `<noscript>` notice.
+
+### Resume page design
+Same design system. Sections reuse the Experience page's components and data (`TechnicalExperience`, `LeadershipActivities`, `Achievements`) so the two pages cannot drift apart. The resume's projects, skills and education render from `data/resume.ts`. The Download Resume button uses a plain anchor with the `download` attribute (`ButtonLink` now uses an anchor when `download` is set). The preview is an `<object>` PDF inside a paper-style frame, with a download fallback inside it; if the file is missing the page shows a labeled placeholder and hides the button.
+
+### Other changes
+`SpecList` aligns each term and detail on the first text baseline (a visual-review finding: terms sat above 44px-tall links). `ExperienceEntry` supports a location line and optional responsibilities. `.env.example` added and allowed in `.gitignore`.
+
+### Files
+- Created: `src/lib/contact.ts`, `src/app/contact/actions.ts`, `src/components/ContactForm.tsx`, `src/sections/{ContactFormSection,ResumeSections}.tsx`, `src/data/resume.ts`, `public/resume/resume.pdf`, `.env.example`.
+- Modified: `src/app/{contact,resume}/page.tsx`, `src/data/{profile,experience,skills}.ts`, `src/components/{ExperienceEntry}.tsx`, `src/components/layout/Footer.tsx`, `src/components/ui/{Button,SpecList}.tsx`, `.gitignore`, `README.md`.
+
+### Tested
+- `npm run lint`, `tsc` and `npm run build` pass.
+- Unit test of the contact logic outside the project (validation limits and messages, configuration check, no network call when unconfigured, success only on 2xx, failure on 500 and on a network error, header-injection stripping): all assertions passed.
+- End-to-end in headless Chrome against a local mock mail server: empty submit shows four inline errors and focuses the name field; a provider 500 shows an honest failure and keeps the entered values; a provider 200 shows "Message sent" and the mock received the correct recipient, reply-to, subject and body. Unconfigured: the fieldset is disabled and the notice with the email address shows. No console errors in any case.
+- `/resume/resume.pdf` returns 200 as `application/pdf` (167,966 bytes, identical to the source file).
+- Screenshots of all eight pages in light, dark and 390px mobile: no horizontal overflow, no console errors. Viewed in detail: home (desktop and mobile), contact (default, errors), resume (desktop) and the Secure AI Banking Gateway case study (desktop). The rest were captured but not each inspected.
+
+### Not tested
+- A real send through Resend (no key configured), a real mobile device, the PDF preview in a normal browser (headless Chrome shows a black frame), JavaScript-disabled behavior beyond the notice, keyboard and screen-reader use of the form.
+
+### Errors and solutions
+| Problem | Solution |
+|---|---|
+| Unit test could not import an absolute Windows path | Used a `file://` URL |
+| First form-post test returned nothing | Shell extraction left hidden-field values HTML-encoded; reran with a Node script that decodes them |
+| That test showed field errors are missing from the server-rendered HTML | Expected with `useActionState` on the client; confirmed the client path in a real browser and added the `<noscript>` notice |
+| Visual review: contact terms sat above 44px link text | `SpecList` rows now align on the first baseline |
+
+### Remains
+Configure the mail provider and send a real test message; owner decisions on the flagged conflicts; decide whether to bring more resume content into the site; browser-check the PDF preview. Then Phase 7 (interactions and responsiveness).

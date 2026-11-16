@@ -14,8 +14,9 @@ export type SkillDomain = {
   skills: Skill[];
 };
 
-// Owner-supplied lists. PyTorch is not included: the brief said "if applicable"
-// and it has not been confirmed. Add it only if it can be explained in an interview.
+// Owner-supplied lists. PyTorch was confirmed by the owner's resume (and the
+// ZeroController project). Redis is in the owner's brief but not in the resume:
+// confirm it can be explained in an interview.
 export const skillDomains: SkillDomain[] = [
   {
     id: "ai-ml",
@@ -27,6 +28,7 @@ export const skillDomains: SkillDomain[] = [
       { name: "NumPy" },
       { name: "Pandas" },
       { name: "Scikit-learn", aliases: ["StandardScaler", "PCA", "KMeans"] },
+      { name: "PyTorch" },
       { name: "TensorFlow" },
       { name: "Keras" },
       { name: "NLP" },

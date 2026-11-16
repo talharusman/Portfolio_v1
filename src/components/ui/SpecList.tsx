@@ -15,9 +15,9 @@ export function SpecList({ items, className }: SpecListProps) {
       {items.map(({ term, detail }, index) => (
         <div
           key={`${term}-${index}`}
-          className="grid grid-cols-[6.5rem_1fr] gap-4 py-3 sm:grid-cols-[8rem_1fr]"
+          className="grid grid-cols-[6.5rem_1fr] items-baseline gap-4 py-3 sm:grid-cols-[8rem_1fr]"
         >
-          <dt className="pt-0.5 font-mono text-label text-muted">{term}</dt>
+          <dt className="font-mono text-label text-muted">{term}</dt>
           <dd className="min-w-0">{detail}</dd>
         </div>
       ))}

@@ -29,19 +29,20 @@ export function Footer() {
           </ul>
         </nav>
 
-        <div className="lg:col-span-2">
-          {profile.links.length > 0 ? (
-            <ul className="space-y-1">
-              {profile.links.map((link) => (
-                <li key={link.href}>
-                  <TextLink href={link.href}>{link.label}</TextLink>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <TextLink href="/contact">Get in touch</TextLink>
+        <ul className="space-y-1 lg:col-span-2">
+          {[...profile.links, { label: "Email", href: `mailto:${profile.email}` }].map(
+            (link) => (
+              <li key={link.href}>
+                <TextLink
+                  href={link.href}
+                  className="inline-flex min-h-11 items-center"
+                >
+                  {link.label}
+                </TextLink>
+              </li>
+            ),
           )}
-        </div>
+        </ul>
       </Container>
     </footer>
   );

@@ -42,7 +42,8 @@ export function ButtonLink({
   ...props
 }: ButtonLinkProps) {
   const classes = buttonClasses(variant, className);
-  if (isInternalHref(href)) {
+  // Downloads and external URLs use a plain anchor; only pages use client navigation.
+  if (isInternalHref(href) && props.download === undefined) {
     return <Link href={href} className={classes} {...props} />;
   }
   return <a href={href} className={classes} {...props} />;

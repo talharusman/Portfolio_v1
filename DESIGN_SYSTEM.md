@@ -148,3 +148,13 @@ Real screenshots and diagrams only. A project without a screenshot gets a typogr
 - **Achievements** use `SpecList`: the context is the mono term and the achievement is set in display type.
 - `Section` accepts `number`; use it only where the brief numbers sections.
 - `Tag` sets `translate="no"`, so use it for technology and product names, not for sentences.
+
+## Resume and contact conventions (Phase 6)
+
+- **Contact form**: fields are `TextField` and `TextAreaField` in a disabled-while-pending `fieldset`. A legend states that all fields are required. Errors are inline and use the existing pattern (heavier border, icon, "Error:" prefix); a polite live region below the button carries form-level messages. Success replaces the form with an accent-bordered "Message sent" panel and appears only after the server confirms delivery.
+- **Unavailable state**: when mail is not configured the fieldset is disabled and a message with the email address shows. Never style an unavailable or failed state as success.
+- **Contact details** use `SpecList` with real links (`translate="no"` on identifiers).
+- **Closing statement**: a full-width `font-semiwide` uppercase `h2` at `text-h1`.
+- **Resume sections** reuse `Section`, `SpecList`, `TagList`, `ExperienceEntry` and the date-column list pattern (11rem mono period and location column beside the details).
+- **PDF preview**: a paper-style frame (grid background, bordered page at 17:22) holding the real PDF in an `<object>`, with a download link as fallback content and a labeled placeholder when the file is missing. Download actions use a plain anchor with the `download` attribute; never replace the PDF with an image.
+- `SpecList` rows align term and detail on the first text baseline.

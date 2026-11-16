@@ -13,6 +13,21 @@ function BulletList({ items }: { items: string[] }) {
   );
 }
 
+function Detail({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div>
+      <p className="font-mono text-label text-muted">{label}</p>
+      <div className="mt-2 max-w-measure font-serif text-body">{children}</div>
+    </div>
+  );
+}
+
 /**
  * One timeline entry: the period in a narrow column, the details beside it.
  * A missing period shows a labeled placeholder, never an invented date.
@@ -22,8 +37,9 @@ export function ExperienceEntry({ entry }: { entry: ExperienceEntryData }) {
 
   return (
     <li className="grid gap-x-8 gap-y-3 border-t border-rule py-8 md:grid-cols-[11rem_1fr]">
-      <div className="font-mono text-label text-muted">
-        {entry.period ? entry.period : <Tag>Dates to be added</Tag>}
+      <div className="space-y-1 font-mono text-label text-muted tabular-nums">
+        <p>{entry.period ? entry.period : <Tag>Dates to be added</Tag>}</p>
+        {entry.location ? <p>{entry.location}</p> : null}
       </div>
 
       <div className="min-w-0 space-y-6">
@@ -36,16 +52,15 @@ export function ExperienceEntry({ entry }: { entry: ExperienceEntryData }) {
 
         <p className="max-w-measure font-serif text-body">{entry.summary}</p>
 
-        <div>
-          <p className="font-mono text-label text-muted">Responsibilities</p>
-          <div className="mt-2 max-w-measure font-serif text-body">
+        {responsibilities ? (
+          <Detail label="Responsibilities">
             {isTodo(responsibilities) ? (
               <PlaceholderNote>{responsibilities.todo}</PlaceholderNote>
             ) : (
               <BulletList items={responsibilities} />
             )}
-          </div>
-        </div>
+          </Detail>
+        ) : null}
 
         {technologies && technologies.length > 0 ? (
           <div>
@@ -56,16 +71,13 @@ export function ExperienceEntry({ entry }: { entry: ExperienceEntryData }) {
           </div>
         ) : null}
 
-        <div>
-          <p className="font-mono text-label text-muted">Contributions</p>
-          <div className="mt-2 max-w-measure font-serif text-body">
-            {isTodo(contributions) ? (
-              <PlaceholderNote>{contributions.todo}</PlaceholderNote>
-            ) : (
-              <BulletList items={contributions} />
-            )}
-          </div>
-        </div>
+        <Detail label="Contributions">
+          {isTodo(contributions) ? (
+            <PlaceholderNote>{contributions.todo}</PlaceholderNote>
+          ) : (
+            <BulletList items={contributions} />
+          )}
+        </Detail>
       </div>
     </li>
   );

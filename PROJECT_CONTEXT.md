@@ -28,15 +28,21 @@ A distinctive, premium, editorial, minimalist engineering portfolio that shows t
 
 Case studies need architecture, implementation detail, challenges and **verified** results. Only the stack above is confirmed so far. Everything else must come from the owner or from the project repositories. Where a result is not available, omit it. Do not estimate.
 
-## Information still needed from the owner
+## Owner-supplied facts and open questions
 
-- Repository links for each project, and any real live URLs. Leave out any link not provided.
-- Per-project facts: what it does, the architecture, the owner's role, real challenges, and real results or evaluation numbers.
-- Real GitHub, LinkedIn and contact email. The email on the Claude account is not assumed to be the public one.
-- `public/resume/resume.pdf` (the real resume).
-- Optional: a portrait photo, and screenshots for `public/projects/<slug>/`.
-- Details for Web Hunt (year, organizer, team or solo), PROCOM'26 AI Grand Prix (role scope), and the Robotics and Automation Society AI Division (role, dates).
-- Current LeetCode profile URL and badge count.
+Source of truth for experience and figures: the owner's resume (`public/resume/resume.pdf`, mirrored in `src/data/resume.ts` and `src/data/experience.ts`). Contact details: email `talharusman2004@gmail.com`, LinkedIn `https://www.linkedin.com/in/talharusman/`, GitHub `https://github.com/talharusman`, location Karachi, Pakistan. The phone number in the PDF is deliberately not shown on any page.
+
+Still needed or undecided:
+- Conflicts to resolve: Fake Job Posting stack (Keras and Docker vs the resume's Scikit-Learn), the Robotics and Automation Society role wording ("AI Division Leadership" vs "Head"), whether "Hospital Management System" is the site's "Smart Healthcare Management System", and Redis (in skills, not in the resume).
+- Project repository URLs, live demo URLs and screenshots (`public/projects/<slug>/`); the remaining case-study details (why each problem mattered, contribution, challenges, learnings), and confirmation of the draft architecture diagrams and filter assignments.
+- Leadership dates, and details for Web Hunt. LeetCode figures to verify (400+ problems, six badges) and a LeetCode URL if wanted.
+- An availability status, if the header indicator should show.
+- Mail provider configuration for the contact form (see below).
+- Whether to add the resume's AI Grand Prix Competition Platform and ZeroController projects to the Projects page, and to use the resume figures in the case studies and About page.
+
+## Contact form configuration
+
+The form sends through Resend's REST API only when `RESEND_API_KEY` and `CONTACT_TO_EMAIL` are set (server environment or `.env.local`; see `.env.example`). `CONTACT_FROM_EMAIL` is optional. Without them the form is disabled and tells visitors to email directly; it never reports success unless the provider accepted the message.
 
 ## Tech stack (installed and working)
 

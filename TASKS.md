@@ -87,17 +87,34 @@ Skills used: `frontend-design`, `web-design-guidelines` (audit, one fix applied)
 - [x] Lint, type-check, build, served-page checks (accent set matches an independent calculation from the project stacks)
 - [x] `web-design-guidelines` audit with fix (`translate="no"` on technology labels)
 - [ ] **Browser check** (desktop, tablet, mobile; light and dark)
-- [ ] **PyTorch** was left out ("if applicable" in the brief and unconfirmed). Add it to `src/data/skills.ts` only if you can explain it in an interview.
+- [x] PyTorch added (confirmed by the resume and the ZeroController project)
 - [ ] Review the skills lists once more against "can I explain this in an interview" (NumPy, Pandas, TensorFlow, Computer Vision, Redis, Model Evaluation, Feature Engineering and others have no project on the site yet)
-- [ ] Owner supplies technical experience (internships or engineering work) in `src/data/experience.ts`: organization, position, dates, responsibilities, technologies, contributions. None is shown until supplied.
-- [ ] Owner supplies dates, responsibilities and contributions for PROCOM’26 and the Robotics and Automation Society. Entries cannot be ordered chronologically until dates exist.
+- [x] Technical experience supplied through the resume (Bank Alfalah, freelance, teaching assistant); see Phase 6
+- [ ] Leadership dates are still missing (responsibilities and contributions came from the resume). Entries cannot be ordered chronologically until dates exist.
 - [ ] **Verify the LeetCode figures** ("400+ problems solved", "Six badges") before publishing; they are shown as stated and flagged in `src/data/experience.ts`. No LeetCode link is shown until a profile URL is supplied.
 - [ ] Decide whether the home page capability preview (`src/data/expertise.ts`, from the Phase 2 brief) should be generated from the skills data so the two lists cannot drift
 
-## Phase 6: Resume and Contact
-- [ ] Resume page (web version plus PDF download once the file exists)
-- [ ] Contact page (mailto, copy email, profile links, no fake form)
-- [ ] Browser check, audit and fixes
+## Phase 6: Resume and Contact (implemented; partly reviewed in a browser)
+Skills used: `frontend-design`, `web-design-guidelines` (audit, two fixes applied).
+- [x] Resume page: headline from the brief, prominent Download Resume button, professional introduction, education, technical skills, projects, experience, leadership, achievements, document-style PDF preview
+- [x] The real PDF is served at `/resume/resume.pdf` (copied from the file the owner attached; text verified identical). It is a PDF, not an image; the download button and the preview appear only when the file exists.
+- [x] Contact page: label, headline and description from the brief; Email, LinkedIn, GitHub (real links) and Location; form with name, email, subject and message; closing statement
+- [x] Contact form: server-side validation, inline errors with focus on the first one, pending state, success only when the mail provider confirms delivery, honest "not set up" and failure states, honeypot, `<noscript>` notice
+- [x] Mail goes through Resend's REST API only when `RESEND_API_KEY` and `CONTACT_TO_EMAIL` are set (see `.env.example` and the README); nothing is sent or faked otherwise
+- [x] Owner facts from the resume applied: contact details, technical experience (Bank Alfalah, freelance, teaching assistant), leadership details, PyTorch added to skills
+- [x] Footer now shows LinkedIn, GitHub and Email
+- [x] Tested: unit test of validation and sending (mock provider), end-to-end form test in headless Chrome against a local mock mail server (empty submit, provider failure, success), unconfigured state, `/resume/resume.pdf` served as `application/pdf`
+- [x] First real visual check: screenshots of all eight pages in light, dark and 390px mobile; no horizontal overflow and no console errors on any of them
+- [ ] **Configure the mail provider** in your hosting settings or `.env.local`: `RESEND_API_KEY` and `CONTACT_TO_EMAIL`. Until then the form shows "not set up" and the page tells visitors to email you. With Resend's default sender (`onboarding@resend.dev`) mail is delivered only to the Resend account owner's address; verify a domain to change that. Then send one real test message.
+- [ ] **Owner decisions needed (conflicts between earlier briefs and the resume):**
+  - Fake Job Posting Prediction: the Phase 1 stack says Keras and Docker; the resume says Python, Flask, React.js, Scikit-Learn, TF-IDF, SMOTE (no Keras, no Docker). Not changed on the site yet.
+  - Robotics and Automation Society: the brief says "AI Division Leadership"; the resume says "Head, Robotics & Automation Society". The brief's wording is on the site.
+  - Is the resume's "Hospital Management System" the same project as the site's "Smart Healthcare Management System"? They are listed separately.
+  - Redis is in the skills page but not in the resume. Keep only if you can explain it.
+- [ ] **Resume facts not yet used on the site** (your call): the AI Grand Prix Competition Platform and ZeroController projects (not on the Projects page), the Bank Alfalah context and the figures (5,000 examples, eval loss 0.1885, perplexity 1.2074) in the Secure AI Banking Gateway case study, the 94% accuracy on 18K+ listings for the fake-job case study, and "final-year student, Aug 2023 – May 2027" in About.
+- [ ] **Privacy:** the downloadable PDF contains your phone number. The site pages do not show it. Remove it from the PDF if you do not want it public.
+- [ ] Browser-check the PDF preview in a normal browser (headless Chrome shows a black frame because it does not render PDFs)
+- [ ] Known limitations: with JavaScript disabled a submit gives no visible result (a notice says so); there is no rate limiting beyond validation and the honeypot
 
 ## Phase 7: Interactions and responsiveness
 - [ ] Motion (hero reveal, scroll reveals, hover states) with reduced-motion support
