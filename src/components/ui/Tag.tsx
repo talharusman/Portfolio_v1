@@ -6,6 +6,7 @@ type TagProps = React.ComponentProps<"span"> & { tone?: "neutral" | "accent" };
 export function Tag({ tone = "neutral", className, ...props }: TagProps) {
   return (
     <span
+      translate="no"
       className={cn(
         "inline-flex items-center rounded-control border px-2 py-0.5 font-mono text-label",
         tone === "accent"

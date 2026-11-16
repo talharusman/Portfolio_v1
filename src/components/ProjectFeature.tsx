@@ -18,11 +18,15 @@ export function ProjectFeature({ project, number, reversed }: ProjectFeatureProp
   return (
     <article className="grid items-center gap-x-10 gap-y-8 border-t border-rule py-12 first:border-t-0 lg:grid-cols-12 lg:py-16">
       <div className={cn("min-w-0 lg:col-span-7", reversed && "lg:order-last")}>
-        <ProjectFigure project={project} />
+        <ProjectFigure
+          src={project.image}
+          alt={`${project.title} screenshot`}
+          label={project.category}
+        />
       </div>
 
       <div className="min-w-0 space-y-6 lg:col-span-5">
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
           <span className="font-wide text-h2 font-semibold text-accent tabular-nums">
             {number}
           </span>

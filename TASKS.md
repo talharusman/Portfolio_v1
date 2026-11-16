@@ -60,17 +60,39 @@ Skills used: `frontend-design`, `web-design-guidelines` (audit, one fix applied)
 - [ ] Owner supplies, if wanted: role details and dates for PROCOM’26 and the Robotics and Automation Society AI Division, Web Hunt details, current academic year. None are shown until supplied.
 - [ ] Owner confirms the background wording, which I wrote from the brief, and whether to keep "400+ LeetCode problems solved" (LeetCode badges are not shown, pending verification)
 
-## Phase 4: Projects and case studies
-- [ ] Projects index
-- [ ] Case-study template (overview, architecture, implementation, challenges, verified results)
-- [ ] Six case studies with real content (needs owner information)
-- [ ] `generateStaticParams`, metadata, 404 for unknown slugs
-- [ ] Browser check, audit and fixes
+## Phase 4: Projects and case studies (implemented; browser review pending)
+Skills used: `frontend-design`, `vercel-react-best-practices`, `web-design-guidelines` (audit, fixes applied).
+- [x] Projects page: hero from the brief, category filters (All Projects, AI / ML, Full-Stack, Backend Systems, Deep Learning, Research) as real `?category=` links with counts
+- [x] Alternating editorial project layouts (no card grid) with overview, problem, contribution, implementation highlights, stack, GitHub and live-demo slots, case-study link
+- [x] Reusable case-study page for all six projects: introduction, problem, solution, system architecture, technical implementation, engineering challenges, results and learnings, gallery, Previous / Next / Back navigation
+- [x] Architecture diagram component (layered, real markup, Draft tag until confirmed)
+- [x] Labeled "To be added" placeholders for everything not supplied; nothing fabricated
+- [x] Project data split into one typed file per project (`src/data/projects/`)
+- [x] Lint, type-check, build, filter counts, all six case studies, Previous / Next wrap-around, link check
+- [x] `web-design-guidelines` audit with fixes
+- [ ] **Browser check** (desktop, tablet, mobile; light and dark). Main risks: alternating layout spacing, long category tags, architecture diagram at narrow widths.
+- [ ] **Owner content** (each project, in `src/data/projects/<slug>.ts`, replace the `todo(...)` entries): why the problem mattered, what other approaches lacked, your contribution, engineering challenges, verified results, learnings
+- [ ] Owner supplies GitHub repository URLs (`repoUrl`), live demo URLs if any (`liveUrl`), and real screenshots (`image`, `gallery[].src` under `public/projects/<slug>/`)
+- [ ] Owner confirms the six draft architecture diagrams, then sets `status: "confirmed"` to remove the Draft tag
+- [ ] Owner confirms the filter assignments (for example Deep Learning for the banking gateway and fake-job projects). The Research filter has no projects yet and shows an empty state.
+- [ ] Known limitation: the first request to an unknown project URL returns 200 with the not-found page and `noindex`; later requests return 404 (Next.js 16 Cache Components behavior)
 
-## Phase 5: Skills and Experience
-- [ ] Skills and technical expertise, grouped across Full-Stack and AI equally
-- [ ] Experience and leadership (PROCOM'26, Robotics and Automation Society, Web Hunt, LeetCode once verified)
-- [ ] Browser check, audit and fixes
+## Phase 5: Skills and Experience (implemented; browser review pending)
+Skills used: `frontend-design`, `web-design-guidelines` (audit, one fix applied).
+- [x] Skills & expertise page: your headline and description, five numbered domains with compact labels and a one-line description each, no percentage bars
+- [x] Evidence from project data: a label is accent-marked when a project stack on this site names it (20 skills today); each domain lists the projects it was applied in, with links
+- [x] Experience & leadership page: headline from the brief; Technical Experience, Leadership & Activities (PROCOM’26 AI Grand Prix, Robotics and Automation Society) and Achievements
+- [x] Reusable timeline entry (period column, organization, position, summary, responsibilities, technologies, contributions)
+- [x] Nothing invented: missing dates, responsibilities and contributions show labeled "To be added" notes
+- [x] Lint, type-check, build, served-page checks (accent set matches an independent calculation from the project stacks)
+- [x] `web-design-guidelines` audit with fix (`translate="no"` on technology labels)
+- [ ] **Browser check** (desktop, tablet, mobile; light and dark)
+- [ ] **PyTorch** was left out ("if applicable" in the brief and unconfirmed). Add it to `src/data/skills.ts` only if you can explain it in an interview.
+- [ ] Review the skills lists once more against "can I explain this in an interview" (NumPy, Pandas, TensorFlow, Computer Vision, Redis, Model Evaluation, Feature Engineering and others have no project on the site yet)
+- [ ] Owner supplies technical experience (internships or engineering work) in `src/data/experience.ts`: organization, position, dates, responsibilities, technologies, contributions. None is shown until supplied.
+- [ ] Owner supplies dates, responsibilities and contributions for PROCOM’26 and the Robotics and Automation Society. Entries cannot be ordered chronologically until dates exist.
+- [ ] **Verify the LeetCode figures** ("400+ problems solved", "Six badges") before publishing; they are shown as stated and flagged in `src/data/experience.ts`. No LeetCode link is shown until a profile URL is supplied.
+- [ ] Decide whether the home page capability preview (`src/data/expertise.ts`, from the Phase 2 brief) should be generated from the skills data so the two lists cannot drift
 
 ## Phase 6: Resume and Contact
 - [ ] Resume page (web version plus PDF download once the file exists)

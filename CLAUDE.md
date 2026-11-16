@@ -28,7 +28,7 @@ There is no test runner. Use npm only. Do not run `git init` unless asked.
 ## Architecture
 
 - `src/app`: routes only. `src/components`: reusable UI (`ui/`, `layout/`). `src/sections`: page sections. `src/data`: typed content. `src/lib`: utilities. `src/styles/globals.css`: design tokens (imported from `src/app/layout.tsx`).
-- Content is kept in `src/data` and passed to components as props, so components carry no hardcoded copy.
+- Content is kept in `src/data` and passed to components as props, so components carry no hardcoded copy. Projects live one file each in `src/data/projects/`; case-study details the owner has not supplied are `todo(...)` placeholders that render as "To be added" notes. Replace them with real content from the owner, never invent it.
 - Server components by default; `"use client"` only for interaction.
 - Design tokens are CSS variables mapped through Tailwind v4 `@theme inline`. There is no `tailwind.config` file.
 - Import alias: `@/*` maps to `src/*`.
@@ -55,4 +55,4 @@ Invoke the skill with the Skill tool before the work, and only say a skill was u
 
 ## Current status
 
-Phases 1 (design system and shell), 2 (home page) and 3 (About page) are implemented; lint and build pass. None has been reviewed in a browser. `web-design-guidelines` has audited the home and About page code. Routes other than Home, About and `/projects/[slug]` are placeholders until their phase. `/design-system` is a development-only reference page (404 in production).
+Phases 1 (design system and shell), 2 (home), 3 (About), 4 (Projects and case studies) and 5 (Skills and Experience) are implemented; lint and build pass. None has been reviewed in a browser. `web-design-guidelines` has audited every page built so far. Resume and Contact are placeholders until Phase 6. `/design-system` is a development-only reference page (404 in production).

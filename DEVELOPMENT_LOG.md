@@ -153,3 +153,84 @@ Phase numbering note: the owner's brief names this phase 3, so About is Phase 3.
 
 ### Remains
 Browser review; optional owner details (roles, dates, academic year); confirmation of the background wording. Then Phase 4 (projects and case studies).
+
+## Phase 4: Projects page and case studies
+
+**Skills used:** `frontend-design` and `vercel-react-best-practices` (both invoked at the start; the Suspense and data-structure guidance was applied), `web-design-guidelines` (invoked after the build; fresh guidelines fetched; findings fixed).
+
+### Content approach (no fabrication)
+The owner supplied, for each project: description, category and technical highlights. Nothing else. So:
+- **Written from supplied facts:** the overview (the owner's description, one sentence), the problem statement and solution (restating the description and highlights), and the technical implementation blocks (each states the general role of a technology the owner listed, such as what LoRA or PCA does). Implementation is grouped by concern, not numbered, because the build order is unknown.
+- **Placeholders (`todo(...)` in the data, rendered as a dashed "To be added" note):** why the problem mattered, what other approaches lacked, the owner's contribution, engineering challenges, verified results and learnings. GitHub links, live demos and screenshots show labeled placeholders too.
+- **Architecture diagrams:** built per project from the technology list, only with layers the project has, tagged "Draft" until the owner confirms them against the repository. Request order and layer grouping are inferences.
+
+### Design and structure decisions
+- Filters are real links (`/projects?category=ai-ml`), so the URL reflects state, middle-click works and no client JavaScript is needed. `FilteredProjects` reads the search params inside a `Suspense` boundary; the fallback is the full unfiltered list, so the page is complete before the filter resolves. The page is a partial prerender.
+- Filter assignments (inferred from the owner categories and stacks): AI / ML for the four AI projects; Full-Stack for Super Tic-Tac-Toe, Fake Job, Real Estate and Healthcare; Backend Systems for the banking gateway; Deep Learning for the banking gateway (LoRA fine-tuning) and Fake Job (Keras). Research has no projects and shows an empty state.
+- Project data is one typed file per project in `src/data/projects/` with a shared `Project` type, `Todo` placeholder type and `isTodo` guard. Order in `index.ts` drives the listing and Previous / Next (wrapping at the ends).
+- Listing layout (`ProjectShowcase`): image and text alternate sides; the text column holds overview, a spec table (problem, contribution, implementation highlights, stack) and links. The home page keeps the lighter `ProjectFeature`.
+- Case study (`/projects/[slug]`) follows the brief's A to I structure, one section component each under `src/sections/case-study/`.
+- The Smart Healthcare project is titled "Smart Healthcare Management System" as in the brief.
+
+### Files
+- Created: `src/data/projects/{types,filters,index}.ts` and one file per project (six), `src/components/{ArchitectureDiagram,ProjectFilters,ProjectShowcase}.tsx`, `src/components/ui/PlaceholderNote.tsx`, `src/sections/{ProjectsBrowser,FilteredProjects}.tsx`, `src/sections/case-study/{CaseStudyIntro,CaseStudyProblem,CaseStudySolution,CaseStudyArchitecture,CaseStudyImplementation,CaseStudyChallenges,CaseStudyResults,CaseStudyGallery,CaseStudyNav}.tsx`.
+- Modified: `src/app/projects/page.tsx`, `src/app/projects/[slug]/page.tsx` (replaced the stand-in), `src/components/{ProjectFigure,ProjectFeature}.tsx`.
+- Deleted: `src/data/projects.ts` (replaced by the folder).
+
+### Audit findings fixed
+- The "All work" label is now Title Case, and `ProjectFigure` takes a `sizes` prop so real images in the gallery and main image do not over-fetch.
+- Noted, not changed: duplicate element ids can exist transiently (and without JavaScript) because the Suspense fallback and the streamed list are both in the HTML; "My contribution" uses first person per the brief; headings stay sentence case.
+
+### Tested
+- Lint, type-check and `npm run build` pass (partial prerender for `/projects`).
+- Production server: filter counts match the data (All 6, AI / ML 4, Full-Stack 4, Backend 1, Deep Learning 2, Research 0 with the empty state); an unknown category falls back to All.
+- All six case studies return 200 with one `h1`, the seven `h2` sections, placeholders and the architecture diagram; Previous and Next resolve (the first project's Previous is the last project).
+- Every internal link on `/projects` and on a case-study page returns 200.
+
+### Not tested
+- **No visual check** (no browser tool). Not seen: alternating-layout spacing, long category tags at narrow widths, the architecture diagram on mobile, dark mode, filter hover and focus states.
+
+### Errors and solutions
+| Problem | Solution |
+|---|---|
+| A bash heredoc batch failed to parse, so the nine case-study section files were not created (same failure as in Phase 0); `tsc` reported the missing modules | Recreated each file with the file tool |
+| Unknown project slug returned 200 on the first request | Next.js 16 with Cache Components does not support `dynamicParams`; the documented approach is `notFound()`, which is in place. The first hit streams 200 with the not-found page and `noindex`; later hits return 404. Recorded as a known limitation |
+| Node and bash resolved `/tmp` to different folders when updating TASKS.md | Used a temporary file inside the project and deleted it |
+| Another shell command failed to parse because of quoting in `sed` | Wrote the text with the file tool and appended it with `cat` |
+
+### Remains
+Browser review; owner content for the placeholders (see `TASKS.md`); confirmation of the diagrams and filter assignments. Then Phase 5 (Skills and Experience).
+
+## Phase 5: Skills & Expertise and Experience & Leadership pages
+
+**Skills used:** `frontend-design` (invoked at the start; the plan was stated and checked against the brief before building) and `web-design-guidelines` (invoked after the build; fresh guidelines fetched). `vercel-react-best-practices` was not re-invoked: both pages are server components with no client code.
+
+### Content decisions (no invention)
+- **Skills:** Lists are exactly the owner's five domains. **PyTorch is excluded** ("if applicable" and unconfirmed). Short domain descriptions are generic definitions, not claims about the owner.
+- **Evidence instead of percentages:** `src/lib/skill-evidence.ts` matches each skill (and listed aliases, such as StandardScaler, PCA and KMeans for Scikit-learn, or HTML for HTML5) against every project's stack and highlights. A matching skill gets an accent label with screen-reader text, and the domain lists the projects it appears in. Skills with no matching project are shown as plain labels, without a negative claim. A legend on the page explains the markers.
+- **Experience:** No technical experience was supplied, so that section shows a labeled placeholder and points to the project case studies. PROCOM’26 uses the owner's description (F1-themed ML competition, 35 teams) and four responsibility areas from the brief; the vague fifth item ("Competition-related responsibilities") was left out. The Robotics and Automation Society role is "AI Division Leadership" (the About page was updated to match). Dates, specific responsibilities and contributions are placeholders.
+- **Chronology:** The brief asked for a chronological timeline, but no dates were supplied, so entries cannot be ordered. The layout (date column plus details) is ready; entries show "Dates to be added" until real dates exist.
+- **Achievements:** Shown as stated. The LeetCode figures are flagged in the data file for verification.
+
+### Design decisions
+- Same design system. `Section` gained an optional `number` marker (used for the five numbered domains because the brief numbers them) and its title column is now a wrapper div, so the sticky behavior covers the number and the heading.
+- Domain titles use uppercase CSS per the brief. Accent labels are paired with legend text and screen-reader text, so color is never the only signal.
+- `Tag` now sets `translate="no"` (audit finding) so browser translation does not alter technology names.
+
+### Files
+- Created: `src/data/{skills,experience}.ts`, `src/lib/skill-evidence.ts`, `src/components/ExperienceEntry.tsx`, `src/sections/{SkillDomains,ExperienceSections}.tsx`.
+- Modified: `src/app/skills/page.tsx`, `src/app/experience/page.tsx` (replaced the placeholders), `src/components/ui/{Section,Tag}.tsx`, `src/data/about.ts` (role wording).
+
+### Tested
+- Lint, type-check and `npm run build` pass.
+- Production server: `/skills` and `/experience` return 200; one `h1` each with ordered headings; five domain sections plus the call to action; no PyTorch; the 20 accent-marked skills match an independent calculation from the project stacks; project links resolve.
+- `/experience` shows the PROCOM’26 description (35 teams), the Society role, all three achievements and the labeled placeholders.
+
+### Not tested
+- **No visual check** (no browser tool). Not seen: label wrapping in the domain lists at narrow widths, the sticky title column with the number, the timeline's date column on tablet, dark mode.
+
+### Errors and solutions
+None this phase. My first attempt to extract accent skill names from the HTML used a regex that did not match the markup; I replaced it with a looser pattern and compared the result against a separate calculation.
+
+### Remains
+Browser review; owner content (experience, dates, responsibilities); PyTorch decision; LeetCode verification. Then Phase 6 (Resume and Contact).

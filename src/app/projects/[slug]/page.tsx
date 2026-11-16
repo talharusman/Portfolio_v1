@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PageHeader } from "@/components/ui/PageHeader";
-import { Section } from "@/components/ui/Section";
-import { SpecList } from "@/components/ui/SpecList";
-import { TagList } from "@/components/ui/Tag";
-import { TextLink } from "@/components/ui/TextLink";
 import { getProject, projects } from "@/data/projects";
+import { CaseStudyArchitecture } from "@/sections/case-study/CaseStudyArchitecture";
+import { CaseStudyChallenges } from "@/sections/case-study/CaseStudyChallenges";
+import { CaseStudyGallery } from "@/sections/case-study/CaseStudyGallery";
+import { CaseStudyImplementation } from "@/sections/case-study/CaseStudyImplementation";
+import { CaseStudyIntro } from "@/sections/case-study/CaseStudyIntro";
+import { CaseStudyNav } from "@/sections/case-study/CaseStudyNav";
+import { CaseStudyProblem } from "@/sections/case-study/CaseStudyProblem";
+import { CaseStudyResults } from "@/sections/case-study/CaseStudyResults";
+import { CaseStudySolution } from "@/sections/case-study/CaseStudySolution";
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
@@ -19,7 +23,6 @@ export async function generateMetadata(
   return project ? { title: project.title, description: project.summary } : {};
 }
 
-// Phase 2 stand-in: confirmed facts only. The full case study is built in Phase 3.
 export default async function ProjectPage(
   props: PageProps<"/projects/[slug]">,
 ) {
@@ -29,44 +32,15 @@ export default async function ProjectPage(
 
   return (
     <>
-      <PageHeader title={project.title} lead={project.summary} />
-      <Section id="overview" title="At a glance">
-        <div className="space-y-8">
-          <SpecList
-            items={[
-              { term: "Category", detail: project.category },
-              {
-                term: "Discipline",
-                detail: (
-                  <TagList
-                    label="Disciplines"
-                    tone="accent"
-                    items={project.disciplines}
-                  />
-                ),
-              },
-              {
-                term: "Stack",
-                detail: <TagList label="Stack" items={project.stack} />,
-              },
-              ...(project.repoUrl
-                ? [
-                    {
-                      term: "Source",
-                      detail: (
-                        <TextLink href={project.repoUrl}>Repository</TextLink>
-                      ),
-                    },
-                  ]
-                : []),
-            ]}
-          />
-          <p className="max-w-measure font-serif text-body text-muted">
-            The full case study, covering architecture, implementation,
-            challenges and results, is being written.
-          </p>
-        </div>
-      </Section>
+      <CaseStudyIntro project={project} />
+      <CaseStudyProblem project={project} />
+      <CaseStudySolution project={project} />
+      <CaseStudyArchitecture project={project} />
+      <CaseStudyImplementation project={project} />
+      <CaseStudyChallenges project={project} />
+      <CaseStudyResults project={project} />
+      <CaseStudyGallery project={project} />
+      <CaseStudyNav slug={project.slug} />
     </>
   );
 }

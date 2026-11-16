@@ -129,3 +129,22 @@ Real screenshots and diagrams only. A project without a screenshot gets a typogr
 - Numbered principle blocks: a two-column ordered list, each item with a top rule, an accent display number (tabular), an uppercase `h3` and serif body text.
 - Interest lists: ruled rows in two columns, `font-wide` at `text-h3`, no tags (tags are for technologies and disciplines).
 - Facts and affiliations use `SpecList`. Row keys include the index, so terms may repeat.
+
+## Project and case-study conventions (Phase 4)
+
+- **Filters** (`ProjectFilters`): rectangular links with a mono count; the active filter is a solid foreground fill and carries `aria-current="true"`. State lives in the URL.
+- **Listing** (`ProjectShowcase`): alternating 7/5 column layout, `h2` project titles, and a `SpecList` for problem, contribution, implementation and stack. Never a card grid.
+- **Placeholders** (`PlaceholderNote`): dashed muted border, a "To be added" tag and a sentence saying what to add. Used for any content the owner has not supplied; never styled to look like real content.
+- **Image frames** (`ProjectFigure`): real image when `src` is set, otherwise a labeled grid-paper placeholder reading "Screenshot to be added". Takes a `sizes` hint.
+- **Architecture diagram** (`ArchitectureDiagram`): ordered layers on the grid background, each with a mono label and bordered node boxes, joined by down arrows. Real markup, so text stays readable. A "Draft" tag shows until `status` is `"confirmed"`.
+- **Case-study sections**: each uses `Section` (annotation title column). Implementation rows are a two-column ruled list (concern on the left, role and technologies on the right).
+- **Navigation**: three-column Previous / Back / Next block with the project title in display type.
+
+## Skills and experience conventions (Phase 5)
+
+- **Skill labels** are `Tag` components in a wrapping list. Accent tone means a project on the site names the technology; neutral means no listed project. Each accent label has screen-reader text, and the page explains the markers in a legend. Never use percentages, bars or ratings.
+- **Domain sections**: numbered `Section` (mono number above an uppercase title), then a muted one-line description, the label list, and an "Applied in" row of project links.
+- **Timeline entry** (`ExperienceEntry`): an 11rem mono date column beside the details (organization in display type, position in accent, summary, responsibilities, technologies, contributions). A missing period is a "Dates to be added" tag, never an invented date.
+- **Achievements** use `SpecList`: the context is the mono term and the achievement is set in display type.
+- `Section` accepts `number`; use it only where the brief numbers sections.
+- `Tag` sets `translate="no"`, so use it for technology and product names, not for sentences.

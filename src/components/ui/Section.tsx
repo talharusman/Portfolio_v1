@@ -8,6 +8,8 @@ type SectionProps = {
   className?: string;
   /** Sets the title in capitals, for sections the brief specifies that way. */
   uppercase?: boolean;
+  /** Mono marker above the title, for example "01". Use only where the brief numbers sections. */
+  number?: string;
 };
 
 /**
@@ -20,6 +22,7 @@ export function Section({
   children,
   className,
   uppercase,
+  number,
 }: SectionProps) {
   return (
     <section id={id} aria-labelledby={`${id}-title`} className="border-t border-rule">
@@ -29,15 +32,22 @@ export function Section({
           className,
         )}
       >
-        <h2
-          id={`${id}-title`}
-          className={cn(
-            "font-wide text-h3 font-semibold lg:sticky lg:top-24 lg:col-span-3 lg:self-start lg:pr-6",
-            uppercase && "uppercase",
-          )}
-        >
-          {title}
-        </h2>
+        <div className="lg:sticky lg:top-24 lg:col-span-3 lg:self-start lg:pr-6">
+          {number ? (
+            <p aria-hidden className="mb-2 font-mono text-label text-accent tabular-nums">
+              {number}
+            </p>
+          ) : null}
+          <h2
+            id={`${id}-title`}
+            className={cn(
+              "font-wide text-h3 font-semibold",
+              uppercase && "uppercase",
+            )}
+          >
+            {title}
+          </h2>
+        </div>
         <div className="min-w-0 lg:col-span-9">{children}</div>
       </Container>
     </section>

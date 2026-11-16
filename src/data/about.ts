@@ -54,7 +54,7 @@ export const about = {
     },
     {
       kind: "Leadership",
-      title: "AI Division",
+      title: "AI Division Leadership",
       context: "Robotics and Automation Society",
     },
     {
