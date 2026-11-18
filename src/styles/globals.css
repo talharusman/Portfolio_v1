@@ -300,24 +300,16 @@
   animation: float-y 5s ease-in-out infinite;
 }
 
-/* "Inverted Obsidian" contact section: its own palette, scoped to the section. */
+/* Home page theme. Colors live on :root (see the theme block in @layer base). */
 @utility obsidian {
-  --ob-bg: #090d0c;
-  --ob-surface: #111716;
-  --ob-text: #f4f7f6;
-  --ob-muted: #8e9d99;
-  --ob-accent: #149e7e;
-  --ob-on-accent: #07120f;
-  --ob-line: rgba(255, 255, 255, 0.08);
-  --ob-ease: cubic-bezier(0.22, 1, 0.36, 1);
   --mx: 70%;
   --my: 20%;
 }
 
 @utility obsidian-grid {
   background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(to right, var(--ob-grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--ob-grid-line) 1px, transparent 1px);
   background-size: 48px 48px;
 }
 
@@ -330,7 +322,7 @@
 @utility obsidian-glow {
   background: radial-gradient(
     520px circle at var(--mx) var(--my),
-    rgba(16, 185, 129, 0.16),
+    var(--ob-glow),
     transparent 70%
   );
 }
@@ -343,6 +335,79 @@
   height: 100%;
   pointer-events: none;
   z-index: 50;
-  opacity: 0.04;
+  opacity: 0.045;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+
+  /* Light mode: fine architectural paper instead of dark smudges. */
+  :root[data-theme="light"] & {
+    opacity: 0.032;
+    mix-blend-mode: multiply;
+  }
+}
+
+/*
+ * Home page palette. Light is "Architectural Alabaster", dark is "Inverted
+ * Obsidian". Same switching rules as the site tokens at the top of this file.
+ */
+@layer base {
+  :root {
+    --ob-ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --ob-bg: #f4f7f5;
+    --ob-surface: #ffffff;
+    --ob-surface-2: #ebf0ed;
+    --ob-text: #0b1412;
+    --ob-muted: #475753;
+    --ob-meta: #6c7d78;
+    --ob-accent: #0f8a6d;
+    --ob-accent-hover: #0b6e57;
+    --ob-on-accent: #ffffff;
+    --ob-line: rgba(11, 20, 18, 0.09);
+    --ob-line-hover: rgba(15, 138, 109, 0.45);
+    --ob-grid-line: rgba(11, 20, 18, 0.045);
+    --ob-glow: rgba(15, 138, 109, 0.06);
+    --ob-glass: rgba(244, 247, 245, 0.85);
+    --ob-backlight: rgba(15, 138, 109, 0.22);
+    --ob-card-shadow:
+      0 10px 30px -10px rgba(11, 20, 18, 0.06), 0 1px 3px rgba(11, 20, 18, 0.04);
+  }
+
+  :root[data-theme="dark"] {
+    --ob-bg: #090d0c;
+    --ob-surface: #111716;
+    --ob-surface-2: #161e1c;
+    --ob-text: #f4f7f6;
+    --ob-muted: #8e9d99;
+    --ob-meta: #5c6b67;
+    --ob-accent: #149e7e;
+    --ob-accent-hover: #19b591;
+    --ob-on-accent: #07120f;
+    --ob-line: rgba(255, 255, 255, 0.08);
+    --ob-line-hover: rgba(20, 158, 126, 0.45);
+    --ob-grid-line: rgba(255, 255, 255, 0.03);
+    --ob-glow: rgba(20, 158, 126, 0.08);
+    --ob-glass: rgba(9, 13, 12, 0.85);
+    --ob-backlight: rgba(20, 158, 126, 0.38);
+    --ob-card-shadow: none;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+      --ob-bg: #090d0c;
+      --ob-surface: #111716;
+      --ob-surface-2: #161e1c;
+      --ob-text: #f4f7f6;
+      --ob-muted: #8e9d99;
+      --ob-meta: #5c6b67;
+      --ob-accent: #149e7e;
+      --ob-accent-hover: #19b591;
+      --ob-on-accent: #07120f;
+      --ob-line: rgba(255, 255, 255, 0.08);
+      --ob-line-hover: rgba(20, 158, 126, 0.45);
+      --ob-grid-line: rgba(255, 255, 255, 0.03);
+      --ob-glow: rgba(20, 158, 126, 0.08);
+      --ob-glass: rgba(9, 13, 12, 0.85);
+      --ob-backlight: rgba(20, 158, 126, 0.38);
+      --ob-card-shadow: none;
+    }
+  }
 }

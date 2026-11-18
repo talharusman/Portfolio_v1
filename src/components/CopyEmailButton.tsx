@@ -31,7 +31,7 @@ export function CopyEmailButton({ email }: { email: string }) {
       <button
         type="button"
         onClick={copy}
-        className="relative z-10 inline-flex min-h-9 items-center gap-1.5 rounded-md border border-(color:--ob-line) bg-white/5 px-3 font-(family-name:--font-jetbrains) text-xs font-medium text-(color:--ob-text) transition-colors duration-200 hover:border-(color:--ob-accent) hover:text-(color:--ob-accent)"
+        className="relative z-10 inline-flex min-h-9 items-center gap-1.5 rounded-md border border-(color:--ob-line) bg-(--ob-surface-2) px-3 font-(family-name:--font-jetbrains) text-xs font-medium text-(color:--ob-text) transition-colors duration-200 hover:border-(color:--ob-accent) hover:text-(color:--ob-accent)"
       >
         {state === "copied" ? (
           <Check aria-hidden className="size-3.5 text-(color:--ob-accent)" />

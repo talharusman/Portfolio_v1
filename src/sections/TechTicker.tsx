@@ -2,12 +2,16 @@ import { expertise } from "@/data/expertise";
 
 const items = Array.from(new Set(expertise.flatMap((group) => group.items)));
 
-/** One slow drift of the owner's technologies. The duplicate set is hidden from assistive tech. */
+const edgeFade =
+  "linear-gradient(to right, transparent, black 12%, black 88%, transparent)";
+
+/** One slow drift of the owner's technologies, faded at both edges. The duplicate set is hidden from assistive tech. */
 export function TechTicker() {
   return (
     <section
       aria-label="Technologies"
-      className="overflow-hidden border-b border-(color:--ob-line) py-5 [mask-image:linear-gradient(to_right,transparent,#000_8%,#000_92%,transparent)]"
+      className="overflow-hidden border-b border-(color:--ob-line) py-5"
+      style={{ maskImage: edgeFade, WebkitMaskImage: edgeFade }}
     >
       <div className="animate-drift flex w-max">
         {[0, 1].map((copy) => (
@@ -23,7 +27,7 @@ export function TechTicker() {
                 className="flex items-center font-(family-name:--font-jetbrains) text-sm text-(color:--ob-muted)"
               >
                 <span className="px-6">{item}</span>
-                <span aria-hidden className="size-1.5 rotate-45 bg-(--ob-accent)" />
+                <span aria-hidden className="size-1.5 rounded-full bg-(--ob-accent)" />
               </li>
             ))}
           </ul>

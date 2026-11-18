@@ -17,12 +17,24 @@ export function EngineeringOverview() {
             return (
               <li
                 key={item}
-                className="group flex items-center gap-4 py-6 text-base font-semibold text-(color:--ob-text) transition-colors duration-300 ease-(--ob-ease) hover:bg-white/[0.03] lg:px-6 lg:py-8 lg:first:pl-0"
+                className="group relative flex items-center gap-4 py-6 text-base font-semibold text-(color:--ob-text) transition-colors duration-300 ease-(--ob-ease) hover:bg-(--ob-surface-2) lg:px-6 lg:py-8 lg:first:pl-0"
               >
+                <span
+                  aria-hidden
+                  className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-(--ob-accent) shadow-[0_0_12px_rgba(20,158,126,0.9)] transition-transform duration-500 ease-(--ob-ease) group-hover:scale-x-100"
+                />
                 <span className="flex size-12 shrink-0 items-center justify-center rounded-lg border border-(color:--ob-line) bg-(--ob-bg) text-(color:--ob-accent) transition-all duration-300 ease-(--ob-ease) group-hover:border-(color:--ob-accent) group-hover:bg-(--ob-accent) group-hover:text-(color:--ob-on-accent)">
                   <Icon aria-hidden className="size-6" />
                 </span>
-                {item}
+                <span className="flex min-w-0 flex-col gap-0.5">
+                  <span
+                    aria-hidden
+                    className="font-(family-name:--font-jetbrains) text-xs font-medium text-(color:--ob-meta)"
+                  >
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  {item}
+                </span>
               </li>
             );
           })}

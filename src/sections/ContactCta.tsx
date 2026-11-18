@@ -1,7 +1,6 @@
 import { ArrowRight, ArrowUpRight, Mail, Terminal } from "lucide-react";
 import Link from "next/link";
 import { CopyEmailButton } from "@/components/CopyEmailButton";
-import { CtaGlow } from "@/components/CtaGlow";
 import { Container } from "@/components/ui/Container";
 import { home } from "@/data/home";
 import { profile } from "@/data/profile";
@@ -45,9 +44,8 @@ export function ContactCta() {
       aria-labelledby="cta-title"
       className="obsidian relative overflow-hidden bg-(--ob-bg) font-(family-name:--font-jakarta) text-(color:--ob-text)"
     >
-      <CtaGlow />
 
-      <Container className="scroll-reveal relative py-12 lg:py-16">
+      <Container className="scroll-reveal relative py-20 lg:py-24">
         <div className="grid items-end gap-x-10 gap-y-6 lg:grid-cols-12">
           <h2
             id="cta-title"
@@ -85,7 +83,7 @@ export function ContactCta() {
           {contacts.map(({ label, value, href, icon, external }) => (
             <li
               key={href}
-              className="group relative flex min-h-32 flex-col justify-between gap-6 rounded-xl border border-(color:--ob-line) bg-(--ob-surface) p-5 transition-colors duration-300 ease-(--ob-ease) hover:border-white/25 sm:p-6"
+              className="group relative flex min-h-32 flex-col justify-between gap-6 rounded-xl border border-(color:--ob-line) bg-(--ob-surface) p-5 shadow-(--ob-card-shadow) transition-colors duration-300 ease-(--ob-ease) hover:border-(color:--ob-line-hover) sm:p-6"
             >
               <span aria-hidden className={`${bracket} top-2.5 left-2.5 border-t-2 border-l-2`} />
               <span aria-hidden className={`${bracket} right-2.5 bottom-2.5 border-r-2 border-b-2`} />
