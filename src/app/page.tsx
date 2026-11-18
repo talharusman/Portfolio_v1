@@ -25,15 +25,17 @@ const person = {
 
 export default function Home() {
   return (
-    <div className="obsidian relative isolate bg-(--ob-bg) font-(family-name:--font-jakarta) text-(color:--ob-text)">
+    <>
+      <div aria-hidden className="noise-overlay" />
+      <div className="obsidian relative isolate bg-(--ob-bg) font-(family-name:--font-jakarta) text-(color:--ob-text)">
       <div aria-hidden className="obsidian-grid pointer-events-none absolute inset-0 -z-10" />
-      <div aria-hidden className="obsidian-grain pointer-events-none absolute inset-0 -z-10" />
       <JsonLd data={person} />
       <Hero />
       <EngineeringOverview />
       <TechTicker />
       <Capabilities />
       <ContactCta />
-    </div>
+      </div>
+    </>
   );
 }
