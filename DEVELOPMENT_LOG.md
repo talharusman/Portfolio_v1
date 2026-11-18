@@ -322,3 +322,7 @@ Safari, Firefox, a real phone, screen readers, the PDF preview in a normal brows
 
 ### Remains
 Cross-browser and device checks, then Phase 8 (testing, optimization and deployment preparation).
+
+## Home page visual polish (post Phase 7)
+
+Skill used: frontend-design. Palette unchanged. Changed: `src/sections/Hero.tsx` (faded grid and accent wash behind the hero, label chip with a soft ping dot), `src/sections/HeroVisual.tsx` (window dots, syntax-colored code, blinking cursor, hard accent offset shadow), `src/sections/EngineeringOverview.tsx` (icon cells with hover fill), `src/components/ProjectFeature.tsx` (poster panel with outlined number when no screenshot; still labeled "Screenshot to be added"), `src/sections/ContactCta.tsx` (full accent band), `src/styles/globals.css` (utilities `bg-grid-fade`, `bg-accent-wash`, `text-outline`, `animate-blink`, `animate-ping-soft`). Verified: tsc and lint pass, dark theme screenshot at 1440px. Not verified: light theme, mobile, build. Note: the design system's earlier "no glow/gradient wash" rule was relaxed for these accent washes at the owner's request; DESIGN_SYSTEM.md not yet updated.

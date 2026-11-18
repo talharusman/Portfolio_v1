@@ -1,5 +1,6 @@
 "use server";
 
+import { headers } from "next/headers";
 import {
   emptyValues,
   sendContactEmail,
@@ -7,6 +8,10 @@ import {
   type ContactState,
   type ContactValues,
 } from "@/lib/contact";
+import { rateLimit } from "@/lib/rate-limit";
+
+const RATE_LIMIT = 5;
+const RATE_WINDOW_MS = 10 * 60 * 1000;
 
 const read = (formData: FormData, key: string) => {
   const value = formData.get(key);
@@ -41,6 +46,21 @@ export async function submitContact(
       values,
       errors,
       message: "Fix the highlighted fields and send again.",
+    };
+  }
+
+  const requestHeaders = await headers();
+  const client =
+    requestHeaders.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    requestHeaders.get("x-real-ip") ||
+    "unknown";
+  if (!rateLimit(`contact:${client}`, RATE_LIMIT, RATE_WINDOW_MS).allowed) {
+    return {
+      status: "error",
+      values,
+      errors: {},
+      message:
+        "Too many messages from this connection. Wait a few minutes and try again, or use the email address above.",
     };
   }
 

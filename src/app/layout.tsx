@@ -3,15 +3,27 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { profile } from "@/data/profile";
 import { archivo, plexMono, sourceSerif } from "@/lib/fonts";
+import { siteUrl } from "@/lib/site";
 import { themeScript } from "@/lib/theme";
 import "@/styles/globals.css";
 
+const description = `Portfolio of ${profile.name}, ${profile.role}. Full-stack applications, machine learning systems and AI engineering projects.`;
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: `${profile.name}: ${profile.role}`,
     template: `%s | ${profile.name}`,
   },
-  description: `Portfolio of ${profile.name}, ${profile.role}.`,
+  description,
+  authors: [{ name: profile.name }],
+  alternates: { canonical: "./" },
+  openGraph: {
+    type: "website",
+    siteName: profile.name,
+    locale: "en",
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 // Browser chrome follows the system theme; values are the owner background colors.

@@ -1,91 +1,75 @@
 # PROJECT_CONTEXT.md
 
-Single source of truth for what this portfolio is and how it is built. Read this before starting any phase. Do not state anything here that has not been confirmed by the owner.
+Single source of truth for what this portfolio is and how it is built. Read this before starting any work. Do not state anything here, or on the site, that the owner has not confirmed.
 
 ## Owner
 
-**Talha Rusman**, Full-Stack Developer | AI Engineer. Do not describe the owner as "senior", and do not invent experience, metrics, user counts, employment history or deployment URLs.
+**Talha Rusman**, Full-Stack Developer | AI Engineer. Never describe the owner as "senior", and never invent experience, metrics, user counts, employment history or deployment URLs.
 
-- Education: BS Artificial Intelligence, FAST-NUCES, Karachi.
-- Leadership: Head of AI Module for PROCOM'26 AI Grand Prix. Robotics and Automation Society, AI Division.
-- Achievements: Second Place in Web Hunt. 400+ LeetCode problems solved. Six LeetCode badges (**unverified**: confirm the current count before publishing).
-- Positioning: Full-Stack Engineering and AI Engineering carry equal weight. Neither is a side note.
+- Education: BS Artificial Intelligence, FAST-NUCES, Karachi (Aug 2023 to May 2027, per the resume).
+- Positioning: Full-Stack Engineering and AI Engineering carry equal weight.
+- Contact: `talharusman2004@gmail.com`, LinkedIn `https://www.linkedin.com/in/talharusman/`, GitHub `https://github.com/talharusman`, Karachi, Pakistan. The phone number in the resume PDF is deliberately not shown on any page.
+- Source of truth for experience, dates and figures: the owner's resume (`public/resume/resume.pdf`, mirrored in `src/data/resume.ts` and `src/data/experience.ts`).
 
 ## Goal
 
-A distinctive, premium, editorial, minimalist engineering portfolio that shows technical depth, architecture understanding and the ability to ship complete AI-powered and full-stack products. It must not look like a generic AI-generated site.
+A distinctive, premium, editorial, minimalist engineering portfolio that shows technical depth, architecture understanding and the ability to ship complete AI-powered and full-stack products. It must not look like a generic AI-generated site. Visual direction: an engineering drawing sheet (annotation-style title column, ruled sections, specification-table project presentation), the owner's fixed palette, restrained teal accent. See `DESIGN_SYSTEM.md`.
 
-## Projects (real, owner-supplied)
+## Pages (all built)
 
-| Slug (proposed) | Project | Key technology |
-|---|---|---|
-| `secure-ai-banking-gateway` | Secure AI Banking Gateway | FastAPI, Qwen2.5, LoRA fine-tuning, GGUF, llama.cpp, JWT, rate limiting, sensitive data detection and redaction, prompt and context management |
-| `next-best-offer` | Next Best Offer Recommendation System | Python, SQL Server, PyODBC, StandardScaler, PCA, KMeans, customer recommendation pipeline |
-| `super-tic-tac-toe-ai` | Super Tic-Tac-Toe AI | Python, FastAPI, HTML, CSS, JavaScript, Minimax, Alpha-Beta pruning |
-| `fake-job-posting-prediction` | Fake Job Posting Prediction | TF-IDF, SMOTE, Keras, Flask, React, Docker |
-| `real-estate-marketplace` | Real Estate Marketplace | Next.js, TypeScript, Tailwind CSS, Prisma, Supabase, Kinde, Stripe |
-| `smart-healthcare-management` | Smart Healthcare Management | React/Next.js, Node.js, Express, MySQL, JWT |
+`/` Home, `/about`, `/projects` (filters via `?category=`), `/projects/[slug]` (six case studies), `/skills` (nav label "Expertise"), `/experience`, `/resume`, `/contact`. Also `/sitemap.xml`, `/robots.txt`, a generated social-share image, and a development-only `/design-system` reference page (404 in production, excluded from the sitemap).
 
-Case studies need architecture, implementation detail, challenges and **verified** results. Only the stack above is confirmed so far. Everything else must come from the owner or from the project repositories. Where a result is not available, omit it. Do not estimate.
+## Projects (owner-supplied stacks)
 
-## Owner-supplied facts and open questions
+Secure AI Banking Gateway, Next Best Offer Recommendation System, Super Tic-Tac-Toe AI, Fake Job Posting Prediction, Real Estate Marketplace, Smart Healthcare Management System. One typed file each in `src/data/projects/`. Stacks, categories and highlights are owner-supplied; problem, solution and implementation text is derived only from them; everything else the owner has not supplied is a `todo(...)` placeholder that renders as a labeled "To be added" note. Architecture diagrams are drafts (tagged "Draft") until the owner confirms them.
 
-Source of truth for experience and figures: the owner's resume (`public/resume/resume.pdf`, mirrored in `src/data/resume.ts` and `src/data/experience.ts`). Contact details: email `talharusman2004@gmail.com`, LinkedIn `https://www.linkedin.com/in/talharusman/`, GitHub `https://github.com/talharusman`, location Karachi, Pakistan. The phone number in the PDF is deliberately not shown on any page.
+## Open owner decisions and missing content
 
-Still needed or undecided:
-- Conflicts to resolve: Fake Job Posting stack (Keras and Docker vs the resume's Scikit-Learn), the Robotics and Automation Society role wording ("AI Division Leadership" vs "Head"), whether "Hospital Management System" is the site's "Smart Healthcare Management System", and Redis (in skills, not in the resume).
-- Project repository URLs, live demo URLs and screenshots (`public/projects/<slug>/`); the remaining case-study details (why each problem mattered, contribution, challenges, learnings), and confirmation of the draft architecture diagrams and filter assignments.
-- Leadership dates, and details for Web Hunt. LeetCode figures to verify (400+ problems, six badges) and a LeetCode URL if wanted.
-- An availability status, if the header indicator should show.
-- Mail provider configuration for the contact form (see below).
-- Whether to add the resume's AI Grand Prix Competition Platform and ZeroController projects to the Projects page, and to use the resume figures in the case studies and About page.
+- **Conflicts between earlier briefs and the resume** (not resolved silently): Fake Job Posting stack (Phase 1 list says Keras and Docker, the resume says Scikit-Learn and no Keras or Docker); Robotics and Automation Society role wording ("AI Division Leadership" in the brief, "Head" in the resume); whether the resume's "Hospital Management System" is the site's "Smart Healthcare Management System"; Redis is in the skills list but not in the resume.
+- Project repository URLs, live demo URLs and screenshots; the remaining case-study details (why each problem mattered, contribution, challenges, results, learnings).
+- Leadership dates; Web Hunt details; verification of the LeetCode figures (400+ problems, six badges).
+- An availability status, if the header indicator should show (hidden until set in `src/data/profile.ts`).
+- Whether to add the resume's AI Grand Prix Competition Platform and ZeroController projects, and use the resume figures in the case studies and About page.
 
-## Contact form configuration
+## Tech stack
 
-The form sends through Resend's REST API only when `RESEND_API_KEY` and `CONTACT_TO_EMAIL` are set (server environment or `.env.local`; see `.env.example`). `CONTACT_FROM_EMAIL` is optional. Without them the form is disabled and tells visitors to email directly; it never reports success unless the provider accepted the message.
+Next.js 16.4.6 (App Router, Cache Components, Turbopack), React 19.3.0, TypeScript 5, Tailwind CSS 4.3.3, ESLint 9, `lucide-react`, `clsx`, `tailwind-merge`. Fonts via `next/font`: Archivo (variable width axis), Source Serif 4, IBM Plex Mono. npm only. Node 20.9 or newer (`engines`); Node 22 or 24 LTS recommended for deployment.
 
-## Tech stack (installed and working)
-
-Next.js 16.4.6 (App Router), React 19.3.0, fonts Archivo, Source Serif 4 and IBM Plex Mono via `next/font`, TypeScript 5, Tailwind CSS 4.3.3, ESLint 9, `motion`, `lucide-react`, `clsx`, `tailwind-merge`. Package manager: npm. Node v25.2.1 is installed locally (a non-LTS release). Consider Node 22 or 24 LTS for deployment.
-
-**This Next.js version differs from older releases.** Read `node_modules/next/dist/docs/` before writing Next.js code (see `AGENTS.md`). `LayoutProps<'/'>` and `PageProps<'/route'>` are global helper types. `new Date()` in a prerendered component fails the build.
+**This Next.js version differs from older releases.** Read `node_modules/next/dist/docs/` before writing Next.js code (see `AGENTS.md`). `LayoutProps<'/'>` and `PageProps<'/route'>` are global helper types generated by `next build` or `next dev`. With Cache Components, `new Date()` in a prerendered component fails the build, and `dynamicParams` is unsupported.
 
 ## Architecture
 
 ```
 src/
-  app/            routes only (layout, pages, not-found, sitemap, robots)
+  app/            routes, layout, template (page fade), sitemap, robots, social image
+    contact/      page and the server action
     projects/[slug]/
-  components/     reusable components
-    ui/           primitives (Container, ButtonLink, Tag, SectionLabel)
-    layout/       Header, Footer, ThemeToggle
-  sections/       page sections (Hero, ProjectIndex, Capabilities, ...)
-  data/           typed content: profile, projects, skills, experience, navigation
-  lib/            utilities (cn, metadata helpers)
-  styles/         globals.css: design tokens and base styles
+  components/     reusable components (ui/, layout/, plus project, diagram and form components)
+  sections/       page sections (home, about, skills, experience, resume, contact, case-study/)
+  data/           typed content: profile, home, about, skills, experience, resume, expertise, navigation, projects/
+  lib/            utilities: cn, fonts, theme script, contact logic, rate limiter, skill evidence, site URL
+  styles/         globals.css: design tokens, utilities, motion
 public/
-  images/         personal and site images
-  projects/       screenshots, one folder per project slug
-  resume/         resume.pdf
+  resume/         resume.pdf (the real downloadable resume)
+  images/         personal and site images (empty until supplied)
+  projects/       screenshots, one folder per project slug (empty until supplied)
 ```
 
 Rules:
-- Content lives in `src/data` as typed objects. Components receive props and contain no hardcoded copy.
-- Server components by default. Add `"use client"` only for interaction (theme toggle, mobile nav, motion).
-- Types live next to the data they describe.
-- No backend or database unless a real feature needs one.
-
-## Pages
-
-`/` Home, `/about`, `/projects`, `/projects/[slug]` (six case studies), `/skills`, `/experience`, `/resume`, `/contact`. Navigation links: Home, About, Projects, Expertise (`/skills`), Experience, Resume, Contact. The uppercase name also links to Home.
+- Content lives in `src/data` as typed objects; components receive props and carry no hardcoded copy.
+- Server components by default. Only three client components exist: `MainNav`, `ThemeToggle`, `ContactForm`.
+- Motion is CSS only (page fade, scroll-driven section reveal, one hero reveal); reduced motion removes it.
+- No database. The only server feature is the contact form (Resend REST API, optional).
 
 ## Key decisions
 
-- Contact: no form. A form needs a real backend and secrets, and the brief forbids fake success responses. Use a real `mailto:` link, a copy-email button and profile links. A real form (Route Handler plus an email service) can be added later if the owner wants one.
-- Resume: the page shows the resume content as a web page, and the PDF download button only appears once `resume.pdf` exists.
-- Theme: system preference by default, with a manual toggle stored in `localStorage` and applied before first paint to avoid a flash.
-- Phase 1 (design system and shell) is implemented. Routes other than Home still render `PagePlaceholder` until their phase. `/design-system` is a development-only reference page; remove it and `PagePlaceholder` before deployment.
+- **Contact form**: sends through Resend only when `RESEND_API_KEY` and `CONTACT_TO_EMAIL` are set; otherwise it is disabled and says so. It reports success only after the provider accepts the message. Layers: server-side validation, honeypot, in-memory rate limit (5 per 10 minutes per client, per server instance), header-injection stripping.
+- **Resume**: the real PDF is served from `public/resume/resume.pdf`; the download button and preview appear only when the file exists.
+- **Theme**: system preference by default, manual toggle stored in `localStorage`, applied before first paint by an inline script.
+- **SEO**: `SITE_URL` sets the public origin for canonical URLs, the sitemap and social previews. Per-page titles and descriptions, Open Graph and Twitter cards, a generated share image, and Person structured data on the home page.
+- **Security headers** set in `next.config.ts` (nosniff, frame denial, referrer policy, permissions policy). No Content-Security-Policy yet (see `TASKS.md`).
+- **Unknown project URLs**: Next.js 16 with Cache Components streams the first request with 200 and the not-found page (with `noindex`); later requests return 404.
 
 ## Skills
 
-`frontend-design`, `web-design-guidelines` and `vercel-react-best-practices` are installed in `.claude/skills/` (verified). Use them as described in `CLAUDE.md`.
+`frontend-design`, `web-design-guidelines` and `vercel-react-best-practices` are installed in `.claude/skills/`. Use them as described in `CLAUDE.md`.
