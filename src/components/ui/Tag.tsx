@@ -8,7 +8,7 @@ export function Tag({ tone = "neutral", className, ...props }: TagProps) {
     <span
       translate="no"
       className={cn(
-        "inline-flex items-center rounded-control border px-2 py-0.5 font-mono text-label",
+        "inline-flex items-center rounded-control border px-2 py-0.5 font-mono text-label transition-colors duration-150 hover:border-accent hover:text-accent",
         tone === "accent"
           ? "border-accent text-accent"
           : "border-rule text-muted",

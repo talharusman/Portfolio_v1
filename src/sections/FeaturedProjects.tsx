@@ -8,7 +8,7 @@ export function FeaturedProjects() {
     <section aria-labelledby="featured-title">
       <Container className="pt-section pb-8">
         <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 pb-10">
-          <h2 id="featured-title" className="font-wide text-h2 font-semibold">
+          <h2 id="featured-title" className="font-wide text-h1 font-semibold">
             Selected projects
           </h2>
           <TextLink href="/projects" className="inline-flex min-h-11 items-center">

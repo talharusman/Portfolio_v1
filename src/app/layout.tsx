@@ -2,7 +2,14 @@ import type { Metadata, Viewport } from "next";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { profile } from "@/data/profile";
-import { archivo, plexMono, sourceSerif } from "@/lib/fonts";
+import {
+  archivo,
+  jakarta,
+  jetbrainsMono,
+  plexMono,
+  sourceSerif,
+  spaceGrotesk,
+} from "@/lib/fonts";
 import { siteUrl } from "@/lib/site";
 import { themeScript } from "@/lib/theme";
 import "@/styles/globals.css";
@@ -41,7 +48,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${archivo.variable} ${sourceSerif.variable} ${plexMono.variable}`}
+      className={`${archivo.variable} ${sourceSerif.variable} ${plexMono.variable} ${spaceGrotesk.variable} ${jakarta.variable} ${jetbrainsMono.variable}`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
