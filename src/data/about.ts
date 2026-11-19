@@ -2,7 +2,7 @@
 // No dates or employment details are included because none were provided.
 export const about = {
   hero: {
-    label: "Behind the code",
+    label: "About me // Engineering mindset",
     headline:
       "Engineering is more than writing code. It’s about solving the right problems.",
     intro:

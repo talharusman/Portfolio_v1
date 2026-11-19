@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { ObsidianPage } from "@/components/ObsidianPage";
 import { about } from "@/data/about";
 import { AboutBackground } from "@/sections/AboutBackground";
+import { AboutCtaBanner } from "@/sections/AboutCtaBanner";
+import { AboutHero } from "@/sections/AboutHero";
 import { AreasOfInterest } from "@/sections/AreasOfInterest";
 import { BeyondDevelopment } from "@/sections/BeyondDevelopment";
-import { ContactCta } from "@/sections/ContactCta";
 import { EngineeringPhilosophy } from "@/sections/EngineeringPhilosophy";
 
 export const metadata: Metadata = {
@@ -13,16 +14,14 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  const { label, headline, intro } = about.hero;
-
   return (
-    <>
-      <PageHeader label={label} title={headline} lead={intro} statement />
+    <ObsidianPage>
+      <AboutHero />
       <AboutBackground />
       <EngineeringPhilosophy />
       <AreasOfInterest />
       <BeyondDevelopment />
-      <ContactCta />
-    </>
+      <AboutCtaBanner />
+    </ObsidianPage>
   );
 }

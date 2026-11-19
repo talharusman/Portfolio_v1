@@ -1,22 +1,46 @@
-import { Section } from "@/components/ui/Section";
+import { Network, BrainCircuit, RefreshCcw, Target } from "lucide-react";
+import { CornerBrackets } from "@/components/CornerBrackets";
+import { EditorialSection } from "@/components/EditorialSection";
 import { about } from "@/data/about";
+
+// Oversized line-art watermarks, one per principle.
+const watermarks = [Target, Network, BrainCircuit, RefreshCcw];
 
 export function EngineeringPhilosophy() {
   return (
-    <Section id="philosophy" title="Engineering philosophy">
-      <ol className="grid gap-x-10 gap-y-10 sm:grid-cols-2">
-        {about.philosophy.map((item, index) => (
-          <li key={item.title} className="border-t border-rule pt-6">
-            <p className="font-wide text-h2 font-semibold text-accent tabular-nums">
-              {String(index + 1).padStart(2, "0")}
-            </p>
-            <h3 className="mt-4 font-wide text-h3 font-semibold text-balance uppercase">
-              {item.title}
-            </h3>
-            <p className="mt-3 font-serif text-body text-muted">{item.text}</p>
-          </li>
-        ))}
+    <EditorialSection
+      id="philosophy"
+      index="02"
+      label="Principles"
+      title="Engineering philosophy"
+    >
+      <ol className="grid gap-4 sm:grid-cols-2">
+        {about.philosophy.map((item, index) => {
+          const Watermark = watermarks[index];
+          return (
+            <li
+              key={item.title}
+              className="group relative flex flex-col overflow-hidden rounded-2xl border border-(color:--ob-line) bg-(--ob-surface) p-6 shadow-(--ob-card-shadow) transition-colors duration-300 ease-(--ob-ease) hover:border-(color:--ob-line-hover) lg:p-8"
+            >
+              <CornerBrackets />
+              <Watermark
+                aria-hidden
+                strokeWidth={1}
+                className="pointer-events-none absolute -right-8 -bottom-8 size-48 text-(--ob-accent) opacity-[0.065] transition-transform duration-500 ease-(--ob-ease) group-hover:-rotate-6 group-hover:scale-110"
+              />
+              <p className="relative font-(family-name:--font-jetbrains) text-sm font-medium text-(color:--ob-accent) tabular-nums">
+                {String(index + 1).padStart(2, "0")}
+              </p>
+              <h3 className="relative mt-4 font-(family-name:--font-space-grotesk) text-2xl leading-none font-bold tracking-[-0.03em] text-balance text-(color:--ob-text) uppercase">
+                {item.title}
+              </h3>
+              <p className="relative mt-4 text-base leading-relaxed text-(color:--ob-muted)">
+                {item.text}
+              </p>
+            </li>
+          );
+        })}
       </ol>
-    </Section>
+    </EditorialSection>
   );
 }

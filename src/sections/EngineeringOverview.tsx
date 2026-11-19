@@ -11,13 +11,13 @@ export function EngineeringOverview() {
       className="border-y border-(color:--ob-line) bg-(--ob-surface)/60"
     >
       <Container>
-        <ul className="divide-y divide-(--ob-line) lg:grid lg:grid-cols-4 lg:divide-x lg:divide-y-0">
+        <ul className="grid grid-cols-2 lg:grid-cols-4">
           {home.overview.map((item, index) => {
             const Icon = icons[index];
             return (
               <li
                 key={item}
-                className="group relative flex items-center gap-4 py-6 text-base font-semibold text-(color:--ob-text) transition-colors duration-300 ease-(--ob-ease) hover:bg-(--ob-surface-2) lg:px-6 lg:py-8 lg:first:pl-0"
+                className="group relative flex flex-col items-start gap-3 border-b border-(color:--ob-line) px-4 py-5 text-sm font-semibold text-(color:--ob-text) transition-colors duration-300 ease-(--ob-ease) odd:border-r hover:bg-(--ob-surface-2) max-lg:nth-last-[-n+2]:border-b-0 sm:text-base lg:flex-row lg:items-center lg:gap-4 lg:border-r lg:border-b-0 lg:px-6 lg:py-8 lg:first:pl-0 lg:last:border-r-0"
               >
                 <span
                   aria-hidden

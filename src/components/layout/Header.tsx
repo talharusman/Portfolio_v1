@@ -13,7 +13,9 @@ import { cn } from "@/lib/utils";
  * Inverted Obsidian landing page; every other page keeps the standard bar.
  */
 export function Header() {
-  const home = usePathname() === "/";
+  const pathname = usePathname();
+  // Pages built on the Obsidian / Alabaster design use the glass bar.
+  const home = pathname === "/" || pathname === "/about";
 
   return (
     <header

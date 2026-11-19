@@ -327,6 +327,25 @@
   );
 }
 
+/* Data-flow dot that pulses down a connector line (system blueprint card). */
+@keyframes flow-down {
+  0% {
+    top: -4px;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    top: calc(100% - 2px);
+    opacity: 0;
+  }
+}
+
+@utility animate-flow-down {
+  animation: flow-down 1.8s linear infinite;
+}
+
 /* Film grain over the whole viewport. Decorative: never intercepts clicks. */
 @utility noise-overlay {
   position: fixed;
