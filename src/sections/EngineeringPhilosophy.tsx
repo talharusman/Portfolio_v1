@@ -14,15 +14,15 @@ export function EngineeringPhilosophy() {
       label="Principles"
       title="Engineering philosophy"
     >
-      <ol className="grid gap-4 sm:grid-cols-2">
+      <ol className="grid gap-3 sm:grid-cols-2 sm:gap-4">
         {about.philosophy.map((item, index) => {
           const Watermark = watermarks[index];
           return (
             <li
               key={item.title}
-              className="group relative flex flex-col overflow-hidden rounded-2xl border border-(color:--ob-line) bg-(--ob-surface) p-6 shadow-(--ob-card-shadow) transition-colors duration-300 ease-(--ob-ease) hover:border-(color:--ob-line-hover) lg:p-8"
+              className="group relative flex flex-col overflow-hidden rounded-2xl border border-(color:--ob-line) bg-(--ob-surface) p-5 shadow-(--ob-card-shadow) transition-[color,border-color,translate] sm:p-6 duration-300 ease-out hover:-translate-y-0.5 hover:border-(color:--ob-line-hover) lg:p-8"
             >
-              <CornerBrackets />
+              <CornerBrackets variant="reticle" />
               <Watermark
                 aria-hidden
                 strokeWidth={1}
@@ -31,10 +31,10 @@ export function EngineeringPhilosophy() {
               <p className="relative font-(family-name:--font-jetbrains) text-sm font-medium text-(color:--ob-accent) tabular-nums">
                 {String(index + 1).padStart(2, "0")}
               </p>
-              <h3 className="relative mt-4 font-(family-name:--font-space-grotesk) text-2xl leading-none font-bold tracking-[-0.03em] text-balance text-(color:--ob-text) uppercase">
+              <h3 className="relative mt-3 font-(family-name:--font-jakarta) text-lg leading-[1.08] sm:mt-4 sm:text-xl font-bold tracking-[-0.025em] text-balance text-(color:--ob-text) uppercase">
                 {item.title}
               </h3>
-              <p className="relative mt-4 text-base leading-relaxed text-(color:--ob-muted)">
+              <p className="relative mt-2.5 max-w-[56ch] text-[0.9375rem] leading-[1.6] sm:mt-4 sm:text-base sm:leading-[1.65] text-(color:--ob-muted)">
                 {item.text}
               </p>
             </li>

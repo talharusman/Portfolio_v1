@@ -10,21 +10,20 @@ const filters: { id: Category; label: string }[] = [
   { id: "systems", label: "Systems & Product" },
 ];
 
-// Which filter each interest belongs to.
-const category: Record<string, Exclude<Category, "all">> = {
-  "Artificial Intelligence": "ai",
-  "Applied Machine Learning": "ai",
-  "Deep Learning": "ai",
-  "Backend Architecture": "systems",
-  "Full-Stack Product Development": "systems",
-  "Computer Vision": "ai",
-  "Intelligent Automation": "ai",
+// Which filters each interest belongs to. Intelligent Automation sits in both.
+const category: Record<string, Exclude<Category, "all">[]> = {
+  "Artificial Intelligence": ["ai"],
+  "Applied Machine Learning": ["ai"],
+  "Deep Learning": ["ai"],
+  "Backend Architecture": ["systems"],
+  "Full-Stack Product Development": ["systems"],
+  "Computer Vision": ["ai"],
+  "Intelligent Automation": ["ai", "systems"],
 };
 
 /** Numbered two-column matrix of interests with category filter pills. */
 export function InterestsMatrix({ interests }: { interests: readonly string[] }) {
   const [filter, setFilter] = useState<Category>("all");
-  const total = String(interests.length).padStart(2, "0");
 
   return (
     <div>
@@ -44,19 +43,18 @@ export function InterestsMatrix({ interests }: { interests: readonly string[] })
               }`}
             >
               {label}
-              {id === "all" ? ` (${total})` : ""}
             </button>
           );
         })}
       </div>
 
-      <ul aria-live="polite" className="mt-8 grid border-t border-(color:--ob-line) md:grid-cols-2 md:gap-x-10">
+      <ul aria-live="polite" className="mt-6 grid border-t sm:mt-8 border-(color:--ob-line) md:grid-cols-2 md:gap-x-10">
         {interests.map((interest, index) => {
-          if (filter !== "all" && category[interest] !== filter) return null;
+          if (filter !== "all" && !category[interest]?.includes(filter)) return null;
           return (
             <li
-              key={interest}
-              className="group relative flex items-center gap-4 border-b border-(color:--ob-line) py-5 pl-5 transition-transform duration-300 ease-(--ob-ease) hover:translate-x-1.5"
+              key={`${filter}-${interest}`}
+              className="page-in group relative flex items-center gap-4 border-b border-(color:--ob-line) py-4 pl-5 sm:py-5 transition-transform duration-200 ease-out hover:translate-x-1.5"
             >
               <span
                 aria-hidden
@@ -68,7 +66,7 @@ export function InterestsMatrix({ interests }: { interests: readonly string[] })
               >
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <span className="text-lg font-semibold text-(color:--ob-text)">{interest}</span>
+              <span className="text-base font-semibold text-(color:--ob-text) sm:text-lg">{interest}</span>
             </li>
           );
         })}

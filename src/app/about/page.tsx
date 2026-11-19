@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <ObsidianPage>
+    <ObsidianPage className="about-obsidian">
       <AboutHero />
       <AboutBackground />
       <EngineeringPhilosophy />

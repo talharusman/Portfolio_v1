@@ -10,13 +10,13 @@ export function AboutCtaBanner() {
   return (
     <section aria-labelledby="about-cta-title">
       <Container className="scroll-reveal pb-20 min-[900px]:pb-28">
-        <div className="rounded-3xl border border-(color:--ob-line) bg-(--ob-surface) p-8 shadow-(--ob-card-shadow) sm:p-12">
+        <div className="rounded-3xl border border-(color:--ob-line) bg-(--ob-surface) p-6 shadow-(--ob-card-shadow) sm:p-12">
           <p className="font-(family-name:--font-jetbrains) text-sm font-normal tracking-[0.2em] text-(color:--ob-accent) uppercase">
             Continue exploring
           </p>
           <h2
             id="about-cta-title"
-            className="mt-5 text-[clamp(1.5rem,1.1rem+1.6vw,2.25rem)] leading-tight font-bold tracking-[-0.01em] md:whitespace-nowrap max-md:text-balance text-(color:--ob-text)"
+            className="mt-5 text-[clamp(1.5rem,1.1rem+1.6vw,2.25rem)] leading-tight font-bold tracking-[-0.01em] min-[1024px]:whitespace-nowrap max-lg:text-balance text-(color:--ob-text)"
           >
             Ready to inspect the architecture in production?
           </h2>

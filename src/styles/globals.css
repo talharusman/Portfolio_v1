@@ -384,6 +384,7 @@
     --ob-line-hover: rgba(15, 138, 109, 0.45);
     --ob-grid-line: rgba(11, 20, 18, 0.045);
     --ob-glow: rgba(15, 138, 109, 0.06);
+    --ob-reticle: rgba(11, 20, 18, 0.18);
     --ob-glass: rgba(244, 247, 245, 0.85);
     --ob-backlight: rgba(15, 138, 109, 0.22);
     --ob-card-shadow:
@@ -404,6 +405,7 @@
     --ob-line-hover: rgba(20, 158, 126, 0.45);
     --ob-grid-line: rgba(255, 255, 255, 0.03);
     --ob-glow: rgba(20, 158, 126, 0.08);
+    --ob-reticle: rgba(255, 255, 255, 0.18);
     --ob-glass: rgba(9, 13, 12, 0.85);
     --ob-backlight: rgba(20, 158, 126, 0.38);
     --ob-card-shadow: none;
@@ -424,9 +426,30 @@
       --ob-line-hover: rgba(20, 158, 126, 0.45);
       --ob-grid-line: rgba(255, 255, 255, 0.03);
       --ob-glow: rgba(20, 158, 126, 0.08);
+      --ob-reticle: rgba(255, 255, 255, 0.18);
       --ob-glass: rgba(9, 13, 12, 0.85);
       --ob-backlight: rgba(20, 158, 126, 0.38);
       --ob-card-shadow: none;
     }
+  }
+}
+
+/* About page, dark mode: a deeper charcoal canvas and a slightly cooler emerald. */
+@utility about-obsidian {
+  :root[data-theme="dark"] & {
+    --ob-bg: #060908;
+    --ob-surface: #0c1210;
+    --ob-surface-2: #0f1613;
+    --ob-text: #f3f4f6;
+    --ob-muted: #9ca3af;
+    --ob-meta: #6b7280;
+    --ob-accent: #10b981;
+    --ob-accent-hover: #34d399;
+    --ob-on-accent: #060908;
+    --ob-line: rgba(255, 255, 255, 0.07);
+    --ob-line-hover: rgba(16, 185, 129, 0.35);
+    --ob-grid-line: rgba(255, 255, 255, 0.03);
+    --ob-glow: rgba(16, 185, 129, 0.08);
+    --ob-backlight: rgba(16, 185, 129, 0.3);
   }
 }
