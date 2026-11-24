@@ -9,6 +9,10 @@ import type { Architecture } from "@/data/projects/types";
 export function ArchitectureDiagram({
   architecture,
   title,
+
+
+
+  
 }: {
   architecture: Architecture;
   title: string;
