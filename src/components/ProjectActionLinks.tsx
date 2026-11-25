@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 export function ProjectActionLinks({
   project,
   className,
-}: {
+}: {    
   project: Project;
   className?: string;
 }) {

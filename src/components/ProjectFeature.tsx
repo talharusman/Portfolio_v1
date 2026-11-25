@@ -13,6 +13,9 @@ type ProjectFeatureProps = {
   reversed?: boolean;
 };
 
+
+
+
 /** Large editorial project layout used on the home page. Alternates sides. */
 export function ProjectFeature({ project, number, reversed }: ProjectFeatureProps) {
   return (
