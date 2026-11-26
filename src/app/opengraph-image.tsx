@@ -17,24 +17,24 @@ export default function OpenGraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#F4F3EF",
-          color: "#0B0B0A",
+          background: "#F7F5F2",
+          color: "#141414",
           padding: 80,
-          borderLeft: "24px solid #0A6B5E",
+          borderLeft: "24px solid #C23D06",
         }}
       >
-        <div style={{ fontSize: 28, color: "#0A6B5E", letterSpacing: 2 }}>
+        <div style={{ fontSize: 28, color: "#C23D06", letterSpacing: 2 }}>
           PORTFOLIO
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ fontSize: 112, fontWeight: 700, lineHeight: 1 }}>
             {profile.name}
           </div>
-          <div style={{ fontSize: 44, marginTop: 28, color: "#3b3b39" }}>
+          <div style={{ fontSize: 44, marginTop: 28, color: "#6b6864" }}>
             {profile.role}
           </div>
         </div>
-        <div style={{ fontSize: 28, color: "#3b3b39" }}>{profile.education}</div>
+        <div style={{ fontSize: 28, color: "#6b6864" }}>{profile.education}</div>
       </div>
     ),
     size,

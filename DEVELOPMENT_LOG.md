@@ -326,3 +326,60 @@ Cross-browser and device checks, then Phase 8 (testing, optimization and deploym
 ## Home page visual polish (post Phase 7)
 
 Skill used: frontend-design. Palette unchanged. Changed: `src/sections/Hero.tsx` (faded grid and accent wash behind the hero, label chip with a soft ping dot), `src/sections/HeroVisual.tsx` (window dots, syntax-colored code, blinking cursor, hard accent offset shadow), `src/sections/EngineeringOverview.tsx` (icon cells with hover fill), `src/components/ProjectFeature.tsx` (poster panel with outlined number when no screenshot; still labeled "Screenshot to be added"), `src/sections/ContactCta.tsx` (full accent band), `src/styles/globals.css` (utilities `bg-grid-fade`, `bg-accent-wash`, `text-outline`, `animate-blink`, `animate-ping-soft`). Verified: tsc and lint pass, dark theme screenshot at 1440px. Not verified: light theme, mobile, build. Note: the design system's earlier "no glow/gradient wash" rule was relaxed for these accent washes at the owner's request; DESIGN_SYSTEM.md not yet updated.
+
+## Phase 4.1: Projects listing page redesign (Obsidian/Alabaster)
+
+**Skills used:** `frontend-design` (design-plan review before building). `web-design-guidelines` not re-invoked this phase (see Remains).
+
+### Context and decision
+The owner asked for a Swiss-editorial/bento redesign of `/projects` (hero, sliding-glider filter + search + view-switcher control dock, featured flagship card, bento grid with bespoke SVG diagrams, index-ledger alternate view, slide-over case-study drawer), giving an exact palette, font set and card/glow styling. Investigating before writing any code found that the given palette and fonts (Space Grotesk / Plus Jakarta Sans / JetBrains Mono, the exact `#090D0C`/`#111716`/`#149E7E` etc. hex values) were not a new request at all — they are the `--ob-*` tokens and font set already live on the Home and About pages ("Inverted Obsidian / Architectural Alabaster"), which `DESIGN_SYSTEM.md` had never documented. This put the request in direct conflict with `CLAUDE.md`'s then-current "owner colors are fixed" rule and the drawing-sheet system's documented "avoided on purpose" list (all-caps eyebrows, rounded cards, glow, grid overlay), which still govern the rest of the site. Flagged this to the owner via `AskUserQuestion` before building anything; they chose to adopt Obsidian/Alabaster sitewide, apply it to Projects first, and treat the rest of the site as follow-up.
+
+### Done
+- Documented both design systems properly for the first time: `DESIGN_SYSTEM.md` gained an "Inverted Obsidian / Architectural Alabaster system" section (tokens, fonts, atmosphere, reusable components) and a "Projects (listing page) conventions" section; `CLAUDE.md`'s fixed-palette rule now explains the two systems and which pages use which.
+- Built the Projects page entirely from existing `src/data/projects/*` content — no invented metrics, stacks, links or copy. All six projects, their real filter categories, and the `?category=` URL convention were kept.
+- New: `src/sections/ProjectsHero.tsx`, `src/sections/ProjectsExplorer.tsx` (client; filter/search/view state, flagship/grid selection, dossier open/close with focus return), `src/sections/FilteredProjectsExplorer.tsx` (awaits `searchParams`, kept in its own async component behind `Suspense` — required by Next.js 16 Cache Components, same pattern the old `FilteredProjects` used), `src/components/ProjectsControlDock.tsx` (client; measures the active filter tab's offset to position a sliding accent pill), `src/components/ProjectFlagshipCard.tsx`, `src/components/ProjectBentoCard.tsx`, `src/components/ProjectLedgerRow.tsx`, `src/components/ProjectMiniDiagram.tsx` (bespoke per-project flow diagram built from real `architecture.layers`, used on cards, the flagship card and in the drawer), `src/components/ProjectActionLinks.tsx` (real GitHub/live link when the data has one, otherwise an honest disabled lock icon — all six projects show disabled today, since none have `repoUrl`/`liveUrl` yet), `src/components/ProjectDossier.tsx` (client; the slide-over drawer, sections mapped to real `CaseStudy` fields with "To be added" notes for anything still `todo(...)`), `src/lib/project-display.ts` (small pure helpers: primary domain label, core-domain list derived from real filter usage, flagship pick).
+- Changed: `src/app/projects/page.tsx` (now composes the above instead of the old alternating-layout browser), `src/components/layout/Header.tsx` (the Obsidian glass header bar now also applies on `/projects`), `src/styles/globals.css` (added one keyframe/utility, `drawer-in`, for the drawer's slide-in).
+- Removed from the import graph (confirmed via `grep` that nothing else referenced them): `src/sections/ProjectsBrowser.tsx`, `src/sections/FilteredProjects.tsx`, `src/components/ProjectFilters.tsx`, `src/components/ProjectShowcase.tsx`. **Not actually deleted from disk** — see Errors below.
+
+### Tested
+- `npm run lint` and `npx tsc --noEmit`: pass.
+- `npm run build`: passes (Partial Prerendering on `/projects`, same as before).
+- Headless-Chrome DevTools-protocol smoke test (no dependencies; script written to the session scratchpad, not the repo, per the project's established practice): confirmed category filter counts and exclusions (AI/ML shows 4 of 6, correctly excludes Full-Stack-only projects), search filtering by tech term (confirmed correct after fixing the test to set the input value through React's native-setter, not a plain `.value =`), bento/ledger view switch, dossier drawer opens with all five real sections, focus moves to the close button on open, Escape closes it, no console exceptions thrown. No horizontal overflow at 1440px or 390px in either theme (`scrollWidth - clientWidth === 0`). Screenshots reviewed in both themes and at both widths.
+
+### Errors and solutions
+| Problem | Solution |
+|---|---|
+| `lucide-react` in this project's version has no `Github` export (brand icons were dropped) | Used `Terminal`, matching the icon `ContactCta` already uses for GitHub |
+| Build failed: "uncached or runtime data during prerendering" on `/projects` after making the page `async` to await `searchParams` directly | Reverted to the Suspense-boundary pattern (`FilteredProjectsExplorer` as a separate async component), matching how the old `FilteredProjects`/`ProjectsBrowser` split worked |
+| `project.filters.includes(filter.id)` failed to type-check (`FilterId \| "all"` not assignable to `FilterId`) even after an `if (filter.id === "all") continue` guard | TypeScript doesn't narrow a property read inside a closure passed to `.filter()`; assigning the narrowed value to its own `const` first fixed it |
+| First CDP test run showed the flagship card and `innerText` checks failing, and a "Stripe" search returning 6 of 6 instead of 1 | The first two were the test script comparing against mixed-case strings against `uppercase`-transformed `innerText` (not an app bug); the search result was a genuine test-harness gap — setting `input.value` directly doesn't fire React's `onChange` tracker, fixed by calling the native `HTMLInputElement` value setter before dispatching the `input` event |
+| Hero's "Core domains" telemetry value truncated with an ellipsis at 1440px despite fitting on mobile | The value sits in a narrower column on desktop (half-width telemetry strip split three ways) than on the single-column mobile layout; removed `truncate` in favor of `text-balance` wrapping, and reduced the derived domain list from 3 to 2 entries |
+| In the flagship card's architecture diagram, the connector arrow after the last item in a wrapped row pointed at nothing | Moved the arrow to precede each item (except the first) instead of following it, so a wrap starts the new row with "→ Label" instead of ending the old one with a dangling arrow |
+
+### Remains
+- **Permission denied:** deleting the four superseded files listed above was blocked by the session's destructive-action safeguard. They are confirmed dead code but still physically present; ask the owner directly before deleting.
+- `web-design-guidelines` was not re-invoked specifically for this page this phase.
+- The rest of the site (Skills, Experience, Resume, Contact, `/projects/[slug]` case studies, Footer) is still on the drawing-sheet system; migrating it is the owner-approved follow-up.
+- Everything already open from Phase 4 (repo/live URLs, screenshots, the `todo(...)` case-study content, draft-diagram confirmation) is unchanged and now more visible via the dossier drawer's "To be added" notes.
+- Not verified: Safari, Firefox, a physical phone, screen readers.
+
+## Phase 4.2: Sitewide color-theme change (orange on near-black)
+
+### Context and decision
+The owner asked for color-theme recommendations, explicitly wanting something that reads as "senior-designed," not AI-generated. Presented four distinct, non-cliché directions (Cobalt Systems/blue, Amber Signal, Ink & Vellum, Violet Circuit), each with full token values and a rationale grounded in the owner's AI + full-stack identity. The owner picked Cobalt Systems and implementation began (base tokens, Obsidian tokens, several hardcoded glow colors). Partway through, the owner supplied a reference image — a "TG" brand mark in vivid orange on near-black/white — and asked to use that palette instead. Stopped the blue rollout and re-derived an orange-on-near-black palette from the reference (no pixel color-picker access to the image, so the exact hex is a close visual estimate, flagged in `TASKS.md` for owner confirmation).
+
+### Done
+- `src/styles/globals.css`: replaced both the drawing-sheet tokens (`--background`, `--foreground`, `--accent`, `--on-accent`, light and dark) and every `--ob-*` Obsidian token (including the About page's deeper-dark variant) with the new orange/near-black values, so both coexisting design systems now share one color identity.
+- Found and fixed glow/shadow effects that were hardcoded as literal `rgba(20,158,126,...)` / `rgba(16,185,129,...)` (the old emerald) directly in Tailwind arbitrary-value class strings, rather than referencing the CSS variables — these would have silently stayed green otherwise. Fixed across `CornerBrackets.tsx`, `SystemBlueprint.tsx`, `Capabilities.tsx`, `ProjectFlagshipCard.tsx`, `AboutCtaBanner.tsx`, `ContactCta.tsx` (two spots), `EngineeringOverview.tsx`, `Hero.tsx`, `HeroPortrait.tsx`, `AboutHero.tsx`.
+- Fixed non-token color literals: `src/app/opengraph-image.tsx` (the generated social-share image), `src/app/layout.tsx` (`<meta name="theme-color">` per color scheme), `src/app/design-system/page.tsx` (the dev-only token reference table).
+- Updated stale "teal"/"emerald" wording describing the old palette: `PROJECT_CONTEXT.md`, `CLAUDE.md`, and code comments in `CtaGlow.tsx`, `ObsidianPage.tsx`, `CornerBrackets.tsx`, `HeroPortrait.tsx`.
+- `DESIGN_SYSTEM.md`: updated both color tables (drawing-sheet and Obsidian/Alabaster) with the new hex values and recomputed WCAG contrast figures for every text/accent pair — all still pass AA (lowest is 4.9:1, light-mode accent-on-background).
+
+### Tested
+- `npm run lint`, `npx tsc --noEmit`, `npm run build`: all pass.
+- `grep` swept the whole `src/` tree for every old hex/rgb literal (`#0A6B5E`, `#18A389`, `#0F8A6D`, `#0B6E57`, `#149E7E`, `#19B591`, `#10b981`, `#34d399`, `#F4F3EF`, `#0B0B0A`, and the matching `rgba(...)` triples) to confirm nothing was missed; final sweep returned no matches.
+- Headless-Chrome screenshots (script in the session scratchpad, not the repo) of Home, About, Projects and Skills in dark mode and Skills/Contact in light mode: the new orange accent and near-black/warm-paper backgrounds render consistently across both design systems, no console errors, no horizontal overflow at 1440px.
+
+### Remains
+- Owner has not explicitly confirmed the sampled orange (`#F2600C` dark / `#C23D06` light) matches their reference image closely enough — I estimated it visually rather than color-picking the actual file.
+- The rest of the open items from Phase 4 and 4.1 (owner content, repo/live URLs, rest-of-site Obsidian migration) are unchanged.

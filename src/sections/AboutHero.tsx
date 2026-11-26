@@ -9,7 +9,7 @@ export function AboutHero() {
   return (
     <section aria-labelledby="about-title" className="relative overflow-x-clip">
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/2 right-0 size-[28rem] -translate-y-1/2 rounded-full bg-[rgba(16,185,129,0.12)] blur-[120px]" />
+        <div className="absolute top-1/2 right-0 size-[28rem] -translate-y-1/2 rounded-full bg-[rgba(255,90,31,0.12)] blur-[120px]" />
       </div>
       <Container className="relative grid max-w-[75rem] grid-cols-[minmax(0,1fr)] items-center gap-x-10 gap-y-9 py-10 sm:gap-y-12 sm:py-14 md:grid-cols-12 md:py-[clamp(1.25rem,7vh,5rem)]">
         <div className="min-w-0 md:col-span-7">

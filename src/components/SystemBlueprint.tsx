@@ -11,7 +11,7 @@ const layers: Layer[] = [
 ];
 
 const bracket =
-  "pointer-events-none absolute size-3 border-(--ob-accent) opacity-50 transition-all duration-300 ease-(--ob-ease) sm:size-4 sm:group-hover:size-6 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(20,158,126,0.8)]";
+  "pointer-events-none absolute size-3 border-(--ob-accent) opacity-50 transition-[width,height,opacity,filter] duration-300 ease-(--ob-ease) sm:size-4 sm:group-hover:size-6 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(242,96,12,0.8)]";
 
 /**
  * Interactive system architecture card: a 3D-tilting panel with three layers
@@ -66,7 +66,7 @@ export function SystemBlueprint() {
                   onPointerEnter={() => setActive(index)}
                   onFocus={() => setActive(index)}
                   onClick={() => setActive(index)}
-                  className={`block w-full rounded-xl border px-3.5 py-3 sm:px-4 sm:py-4 [@media(max-height:700px)]:py-2.5 text-left transition-all duration-300 ease-(--ob-ease) ${
+                  className={`block w-full rounded-xl border px-3.5 py-3 sm:px-4 sm:py-4 [@media(max-height:700px)]:py-2.5 text-left transition-[border-color,background-color] duration-300 ease-(--ob-ease) ${
                     selected
                       ? "border-(color:--ob-accent) bg-(--ob-accent)/10"
                       : "border-(color:--ob-line) bg-(--ob-surface-2) hover:border-(color:--ob-line-hover)"
@@ -83,7 +83,7 @@ export function SystemBlueprint() {
                     <span className="text-[0.9375rem] font-semibold text-(color:--ob-text) sm:text-base">{layer.title}</span>
                     <span
                       aria-hidden
-                      className={`size-2 shrink-0 rounded-full bg-(--ob-accent) transition-all duration-300 ${
+                      className={`size-2 shrink-0 rounded-full bg-(--ob-accent) transition-[opacity,box-shadow] duration-300 ${
                         selected ? "opacity-100 shadow-[0_0_8px_var(--ob-accent)]" : "opacity-0"
                       }`}
                     />

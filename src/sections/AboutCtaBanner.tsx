@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 
 const button =
-  "group inline-flex min-h-14 items-center justify-center gap-3 rounded-xl px-7 text-base font-semibold transition-all duration-300 ease-(--ob-ease)";
+  "group inline-flex min-h-14 items-center justify-center gap-3 rounded-xl px-7 text-base font-semibold transition-[transform,background-color,border-color,box-shadow] duration-300 ease-(--ob-ease)";
 
 /** Closing card: where to go next, with the projects as the main step and contact as the second. */
 export function AboutCtaBanner() {
@@ -23,7 +23,7 @@ export function AboutCtaBanner() {
           <div className="mt-8 flex flex-wrap gap-4">
             <Link
               href="/projects"
-              className={`${button} bg-(--ob-accent) text-(color:--ob-on-accent) hover:-translate-y-0.5 hover:bg-(--ob-accent-hover) hover:shadow-[0_14px_30px_-14px_rgba(20,158,126,0.8)]`}
+              className={`${button} bg-(--ob-accent) text-(color:--ob-on-accent) hover:-translate-y-0.5 hover:bg-(--ob-accent-hover) hover:shadow-[0_14px_30px_-14px_rgba(242,96,12,0.8)]`}
             >
               Next: Explore Selected Projects
               <ArrowRight

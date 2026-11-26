@@ -13,7 +13,7 @@ Single source of truth for what this portfolio is and how it is built. Read this
 
 ## Goal
 
-A distinctive, premium, editorial, minimalist engineering portfolio that shows technical depth, architecture understanding and the ability to ship complete AI-powered and full-stack products. It must not look like a generic AI-generated site. Visual direction: an engineering drawing sheet (annotation-style title column, ruled sections, specification-table project presentation), the owner's fixed palette, restrained teal accent. See `DESIGN_SYSTEM.md`.
+A distinctive, premium, editorial, minimalist engineering portfolio that shows technical depth, architecture understanding and the ability to ship complete AI-powered and full-stack products. It must not look like a generic AI-generated site. Visual direction: an engineering drawing sheet (annotation-style title column, ruled sections, specification-table project presentation), the owner's fixed palette, restrained orange accent on a near-black/warm-paper base. See `DESIGN_SYSTEM.md`.
 
 ## Pages (all built)
 

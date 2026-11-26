@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-/** Emerald glow that follows the pointer across its parent section. Static for touch and reduced motion. */
+/** Orange glow that follows the pointer across its parent section. Static for touch and reduced motion. */
 export function CtaGlow() {
   const ref = useRef<HTMLDivElement>(null);
 

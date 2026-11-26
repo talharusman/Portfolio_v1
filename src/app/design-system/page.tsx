@@ -17,9 +17,9 @@ export const metadata: Metadata = {
 };
 
 const palette = [
-  { token: "background", light: "#F4F3EF", dark: "#0B0B0A", cls: "bg-background" },
-  { token: "foreground", light: "#0B0B0A", dark: "#F4F3EF", cls: "bg-foreground" },
-  { token: "accent", light: "#0A6B5E", dark: "#18A389", cls: "bg-accent" },
+  { token: "background", light: "#F7F5F2", dark: "#0A0A0A", cls: "bg-background" },
+  { token: "foreground", light: "#141414", dark: "#F5F5F3", cls: "bg-foreground" },
+  { token: "accent", light: "#C23D06", dark: "#F2600C", cls: "bg-accent" },
   { token: "muted", light: "62% mix", dark: "62% mix", cls: "bg-muted" },
   { token: "rule", light: "16% mix", dark: "16% mix", cls: "bg-rule" },
   { token: "surface", light: "4% mix", dark: "4% mix", cls: "bg-surface" },

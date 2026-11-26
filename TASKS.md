@@ -76,6 +76,26 @@ Skills used: `frontend-design`, `vercel-react-best-practices`, `web-design-guide
 - [ ] Owner confirms the six draft architecture diagrams, then sets `status: "confirmed"` to remove the Draft tag
 - [ ] Owner confirms the filter assignments (for example Deep Learning for the banking gateway and fake-job projects). The Research filter has no projects yet and shows an empty state.
 - [ ] Known limitation: the first request to an unknown project URL returns 200 with the not-found page and `noindex`; later requests return 404 (Next.js 16 Cache Components behavior)
+- [x] **Note:** the Projects *listing* page described above (alternating editorial layout, `ProjectFilters`/`ProjectShowcase`) was superseded by the Obsidian/Alabaster redesign in the phase below. The `/projects/[slug]` case studies described above are unchanged and still current.
+
+## Phase 4.1: Projects listing page redesign (Obsidian/Alabaster) — implemented and browser-verified
+Skills used: `frontend-design` (design-plan review before building), `web-design-guidelines` (not re-invoked this phase; the page reuses already-audited patterns from Home/About — flagged as a gap below).
+- [x] Owner asked for a Swiss-editorial/bento redesign of `/projects` with specific hex colors, fonts and card styling. Investigation found that exact palette and font set already live on the site as the unwritten "Inverted Obsidian / Architectural Alabaster" system (Home, About) — not a new system. Flagged the conflict with the drawing-sheet system to the owner, who chose to extend Obsidian/Alabaster sitewide; documented both systems properly in `DESIGN_SYSTEM.md` and `CLAUDE.md` (they previously only documented the drawing-sheet system).
+- [x] New hero (`ProjectsHero`): eyebrow + page index (from real nav data), two-line headline, telemetry strip (systems shipped, core domains derived from real filter data, architecture descriptor)
+- [x] New control dock (`ProjectsControlDock`): sliding-glider category filters with real counts, live tech/title search, bento/ledger view switcher
+- [x] New featured flagship card (`ProjectFlagshipCard`) for the unfiltered view, using the first `featured` project in data order; real stats only (layer count, stack size, disciplines) — no invented metrics
+- [x] New bento cards (`ProjectBentoCard`) and index-ledger rows (`ProjectLedgerRow`), both built from the same filtered/searched list, with a bespoke per-project mini diagram (`ProjectMiniDiagram`) built from each project's real `architecture.layers` instead of a stock image or generic icon
+- [x] GitHub/live links (`ProjectActionLinks`): real link when `repoUrl`/`liveUrl` is set, otherwise an honest disabled state — all six projects currently show the disabled state, since none have these URLs yet
+- [x] New slide-over "system architecture dossier" drawer (`ProjectDossier`): 01 problem statement, 02 architecture & data flow, 03 engineering decisions & trade-offs, 04 measured impact & benchmarks, complete stack — all from real `CaseStudy` data, with "To be added" placeholders for fields still `todo(...)` (results/challenges/contribution for every project today). Esc/backdrop/close-button dismissal, focus moves to the close button on open and back to the trigger on close, link through to the full case study.
+- [x] Removed the old `ProjectsBrowser`, `FilteredProjects`, `ProjectFilters`, `ProjectShowcase` sections/components from the import graph (nothing else referenced them) and replaced them with `FilteredProjectsExplorer` + `ProjectsExplorer`, keeping the existing Suspense-around-`searchParams` pattern Next.js 16 Cache Components requires.
+- [x] Header's Obsidian "glass bar" now also applies on `/projects` (previously only `/` and `/about`)
+- [x] Lint, `tsc --noEmit`, production build all pass
+- [x] Verified with a headless-Chrome DevTools-protocol smoke test (no dependencies, script in the session scratchpad, not the repo): category filter counts and exclusions, live search filtering (confirmed with the correct React-controlled-input value setter), bento/ledger view switch, dossier open/close/focus-return/Escape, no console exceptions, no horizontal overflow at 1440px or 390px, both themes
+- [ ] **Permission needed:** deleting the four now-unused files (`src/sections/ProjectsBrowser.tsx`, `src/sections/FilteredProjects.tsx`, `src/components/ProjectFilters.tsx`, `src/components/ProjectShowcase.tsx`) was blocked by the session's destructive-action classifier. They are dead code (nothing imports them) but still on disk.
+- [ ] `web-design-guidelines` was not re-invoked for this specific page (it was invoked for Home and About when the underlying pattern was audited); worth a dedicated pass
+- [ ] Rest-of-site migration to Obsidian/Alabaster (Skills, Experience, Resume, Contact, `/projects/[slug]` case studies, Footer) is still open, per the owner's "adopt sitewide" decision
+- [ ] Owner's long-standing opens from Phase 4 above (repo/live URLs, screenshots, `todo(...)` content, draft-diagram confirmation) still apply — the dossier drawer surfaces them more visibly now via "To be added" notes
+- [ ] Not verified: Safari/Firefox, a physical phone, screen readers (same gap as the rest of the site)
 
 ## Phase 5: Skills and Experience (implemented; browser review pending)
 Skills used: `frontend-design`, `web-design-guidelines` (audit, one fix applied).
@@ -133,6 +153,17 @@ Skills used: `frontend-design`'s system (no new visual style), `web-design-guide
 - [ ] Not verified in a real browser by me: Safari and Firefox (scroll-driven reveals need `animation-timeline`; browsers without it show the content with no animation), a physical phone, screen readers
 - [ ] The Resume page PDF preview (headless Chrome cannot render PDFs)
 - [ ] Decide whether to move the browser test scripts into the repo (for example `scripts/`) so they survive the session; they currently depend on a local Chrome install
+
+## Phase 4.2: Sitewide color-theme change (orange on near-black) — implemented and verified
+- [x] Owner asked for portfolio color-theme recommendations ("not AI-generated, senior-designer feel"). Gave 4 distinct directions (Cobalt Systems, Amber Signal, Ink & Vellum, Violet Circuit); owner picked Cobalt Systems.
+- [x] Began implementing Cobalt Systems (blue), then the owner supplied a reference image (a "TG" brand mark: vivid orange on near-black/white) and asked to use that instead. Switched mid-implementation to an orange-on-near-black identity derived from the reference.
+- [x] Updated both coexisting systems' color tokens together, so the whole site now shares one identity: `--background`/`--foreground`/`--accent`/`--on-accent` in `src/styles/globals.css` (governs Skills, Experience, Resume, Contact, case studies, Footer) and the `--ob-*` tokens (governs Home, About, Projects), including the About page's deeper-dark variant.
+- [x] Found and fixed glow/shadow colors that were hardcoded as raw `rgba(20,158,126,...)` (emerald) in component class strings rather than driven by the CSS variables — these would have stayed green otherwise. Fixed in `CornerBrackets.tsx`, `SystemBlueprint.tsx`, `Capabilities.tsx`, `ProjectFlagshipCard.tsx`, `AboutCtaBanner.tsx`, `ContactCta.tsx`, `EngineeringOverview.tsx`, `Hero.tsx`, `HeroPortrait.tsx`, `AboutHero.tsx`.
+- [x] Updated non-CSS color literals: `app/opengraph-image.tsx` (social share image), `app/layout.tsx` (browser theme-color meta), `app/design-system/page.tsx` (dev-only token reference table).
+- [x] New palette, both themes, contrast-checked (all pairs pass WCAG AA): light bg `#F7F5F2` / text `#141414` / accent `#C23D06`; dark bg `#0A0A0A` / text `#F5F5F3` / accent `#F2600C`. Full token tables in `DESIGN_SYSTEM.md`.
+- [x] Updated stale "teal"/"emerald" wording in `PROJECT_CONTEXT.md`, `CLAUDE.md` and code comments (`CtaGlow.tsx`, `ObsidianPage.tsx`, `CornerBrackets.tsx`, `HeroPortrait.tsx`) to match.
+- [x] Verified: `npm run lint`, `npx tsc --noEmit`, `npm run build` all pass. Headless-Chrome screenshots of Home, About, Projects, Skills and Contact in both light and dark confirmed the new palette renders consistently sitewide with no console errors and no horizontal overflow.
+- [ ] Owner has not yet confirmed the exact orange hex sampled from their reference image is a close enough match (I estimated it visually; I did not have pixel-level color-picker access to the supplied image).
 
 ## Phase 8: Testing, optimization, deployment prep
 - [ ] Full audit with `web-design-guidelines` across all pages
