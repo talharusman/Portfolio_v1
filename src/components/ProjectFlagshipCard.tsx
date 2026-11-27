@@ -76,7 +76,7 @@ export function ProjectFlagshipCard({
           <button
             type="button"
             onClick={onInspect}
-            className="group inline-flex min-h-11 items-center gap-2 rounded-lg bg-(--ob-accent) px-5 text-sm font-semibold text-(color:--ob-on-accent) transition-all duration-300 ease-(--ob-ease) hover:-translate-y-0.5 hover:bg-(--ob-accent-hover) hover:shadow-[0_14px_30px_-14px_rgba(242,96,12,0.8)]"
+            className="group inline-flex min-h-11 items-center gap-2 rounded-lg bg-(--ob-accent) px-5 text-sm font-semibold text-(color:--ob-on-accent) transition-all duration-300 ease-(--ob-ease) hover:-translate-y-0.5 hover:bg-(--ob-accent-hover) hover:shadow-[0_14px_30px_-14px_rgba(20,158,126,0.8)]"
           >
             Inspect architecture
             <ArrowUpRight aria-hidden className="size-4 transition-transform duration-300 ease-(--ob-ease) group-hover:translate-x-1 group-hover:-translate-y-1" />

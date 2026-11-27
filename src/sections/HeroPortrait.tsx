@@ -14,7 +14,7 @@ const bracket = "pointer-events-none absolute size-4 border-(--ob-accent)";
 
 /**
  * Studio portrait stage: the owner's transparent cut-out on a dark architectural
- * panel with an orange backlight, L-brackets and a gentle 3D tilt on desktop hover.
+ * panel with an emerald backlight, L-brackets and a gentle 3D tilt on desktop hover.
  * Height follows the viewport so the hero fits short laptop screens.
  */
 export function HeroPortrait() {
@@ -67,7 +67,7 @@ export function HeroPortrait() {
               aria-hidden
               translate="no"
               style={{ animationDelay: chip.delay }}
-              className={`animate-float absolute hidden items-center gap-2 rounded-lg border border-(color:--ob-line) bg-(--ob-surface)/85 px-3 py-1.5 font-(family-name:--font-jetbrains) text-xs font-medium text-(color:--ob-text) shadow-[0_10px_30px_-12px_rgba(242,96,12,0.6)] backdrop-blur-[8px] lg:flex ${chip.className}`}
+              className={`animate-float absolute hidden items-center gap-2 rounded-lg border border-(color:--ob-line) bg-(--ob-surface)/85 px-3 py-1.5 font-(family-name:--font-jetbrains) text-xs font-medium text-(color:--ob-text) shadow-[0_10px_30px_-12px_rgba(20,158,126,0.6)] backdrop-blur-[8px] lg:flex ${chip.className}`}
             >
               <span className="size-1.5 rounded-full bg-(--ob-accent)" />
               {chip.label}

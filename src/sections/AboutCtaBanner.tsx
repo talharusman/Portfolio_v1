@@ -23,7 +23,7 @@ export function AboutCtaBanner() {
           <div className="mt-8 flex flex-wrap gap-4">
             <Link
               href="/projects"
-              className={`${button} bg-(--ob-accent) text-(color:--ob-on-accent) hover:-translate-y-0.5 hover:bg-(--ob-accent-hover) hover:shadow-[0_14px_30px_-14px_rgba(242,96,12,0.8)]`}
+              className={`${button} bg-(--ob-accent) text-(color:--ob-on-accent) hover:-translate-y-0.5 hover:bg-(--ob-accent-hover) hover:shadow-[0_14px_30px_-14px_rgba(20,158,126,0.8)]`}
             >
               Next: Explore Selected Projects
               <ArrowRight

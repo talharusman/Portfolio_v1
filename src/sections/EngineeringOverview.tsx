@@ -21,7 +21,7 @@ export function EngineeringOverview() {
               >
                 <span
                   aria-hidden
-                  className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-(--ob-accent) shadow-[0_0_12px_rgba(242,96,12,0.9)] transition-transform duration-500 ease-(--ob-ease) group-hover:scale-x-100"
+                  className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-(--ob-accent) shadow-[0_0_12px_rgba(20,158,126,0.9)] transition-transform duration-500 ease-(--ob-ease) group-hover:scale-x-100"
                 />
                 <span className="flex size-12 shrink-0 items-center justify-center rounded-lg border border-(color:--ob-line) bg-(--ob-bg) text-(color:--ob-accent) transition-all duration-300 ease-(--ob-ease) group-hover:border-(color:--ob-accent) group-hover:bg-(--ob-accent) group-hover:text-(color:--ob-on-accent)">
                   <Icon aria-hidden className="size-6" />

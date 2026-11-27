@@ -2,7 +2,7 @@ import { CtaGlow } from "@/components/CtaGlow";
 
 /**
  * Page shell for the Obsidian / Alabaster design: theme-aware background, 48px
- * architectural grid, a pointer-following orange spotlight and a fixed film
+ * architectural grid, a pointer-following emerald spotlight and a fixed film
  * grain overlay. Colors come from the --ob-* tokens, which follow the theme toggle.
  */
 export function ObsidianPage({

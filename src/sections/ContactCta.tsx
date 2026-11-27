@@ -10,7 +10,7 @@ const display = (href: string) =>
   href.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
 
 const bracket =
-  "pointer-events-none absolute size-3 border-(color:--ob-accent) opacity-40 transition-all duration-300 ease-(--ob-ease) group-hover:size-5 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(242,96,12,0.8)]";
+  "pointer-events-none absolute size-3 border-(color:--ob-accent) opacity-40 transition-all duration-300 ease-(--ob-ease) group-hover:size-5 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(20,158,126,0.8)]";
 
 export function ContactCta() {
   const { headline, description } = home.cta;
@@ -60,7 +60,7 @@ export function ContactCta() {
 
         <Link
           href="/contact"
-          className="group mt-8 flex min-h-24 items-center justify-between gap-4 rounded-xl bg-(--ob-accent) px-5 text-(color:--ob-on-accent) transition-all duration-300 ease-(--ob-ease) hover:-translate-y-1 hover:shadow-[0_18px_40px_-18px_rgba(242,96,12,0.7)] sm:min-h-28 sm:px-8"
+          className="group mt-8 flex min-h-24 items-center justify-between gap-4 rounded-xl bg-(--ob-accent) px-5 text-(color:--ob-on-accent) transition-all duration-300 ease-(--ob-ease) hover:-translate-y-1 hover:shadow-[0_18px_40px_-18px_rgba(20,158,126,0.7)] sm:min-h-28 sm:px-8"
         >
           <span className="flex flex-col gap-1">
             <span

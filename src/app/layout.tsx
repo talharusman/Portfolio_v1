@@ -36,8 +36,8 @@ export const metadata: Metadata = {
 // Browser chrome follows the system theme; values are the owner background colors.
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#F7F5F2" },
-    { media: "(prefers-color-scheme: dark)", color: "#0A0A0A" },
+    { media: "(prefers-color-scheme: light)", color: "#F4F3EF" },
+    { media: "(prefers-color-scheme: dark)", color: "#0B0B0A" },
   ],
 };
 

@@ -5,10 +5,10 @@
  * Owner palette is fixed; every other color is a mix of these three.
  */
 :root {
-  --background: #f7f5f2;
-  --foreground: #141414;
-  --accent: #c23d06;
-  --on-accent: #ffffff;
+  --background: #f4f3ef;
+  --foreground: #0b0b0a;
+  --accent: #0a6b5e;
+  --on-accent: #f4f3ef;
 
   --muted: color-mix(in srgb, var(--foreground) 62%, var(--background));
   --rule: color-mix(in srgb, var(--foreground) 16%, var(--background));
@@ -20,19 +20,19 @@
 
 /* Dark: explicit choice, or system preference when no choice is stored. */
 :root[data-theme="dark"] {
-  --background: #0a0a0a;
-  --foreground: #f5f5f3;
-  --accent: #f2600c;
-  --on-accent: #0a0a0a;
+  --background: #0b0b0a;
+  --foreground: #f4f3ef;
+  --accent: #18a389;
+  --on-accent: #0b0b0a;
   color-scheme: dark;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
-    --background: #0a0a0a;
-    --foreground: #f5f5f3;
-    --accent: #f2600c;
-    --on-accent: #0a0a0a;
+    --background: #0b0b0a;
+    --foreground: #f4f3ef;
+    --accent: #18a389;
+    --on-accent: #0b0b0a;
     color-scheme: dark;
   }
 }
@@ -371,64 +371,64 @@
 @layer base {
   :root {
     --ob-ease: cubic-bezier(0.16, 1, 0.3, 1);
-    --ob-bg: #f7f5f2;
+    --ob-bg: #f4f7f5;
     --ob-surface: #ffffff;
-    --ob-surface-2: #efebe5;
-    --ob-text: #141414;
-    --ob-muted: #6b6864;
-    --ob-meta: #87837d;
-    --ob-accent: #c23d06;
-    --ob-accent-hover: #9a3105;
+    --ob-surface-2: #ebf0ed;
+    --ob-text: #0b1412;
+    --ob-muted: #475753;
+    --ob-meta: #6c7d78;
+    --ob-accent: #0f8a6d;
+    --ob-accent-hover: #0b6e57;
     --ob-on-accent: #ffffff;
-    --ob-line: rgba(20, 20, 20, 0.09);
-    --ob-line-hover: rgba(194, 61, 6, 0.45);
-    --ob-grid-line: rgba(20, 20, 20, 0.045);
-    --ob-glow: rgba(194, 61, 6, 0.06);
-    --ob-reticle: rgba(20, 20, 20, 0.18);
-    --ob-glass: rgba(247, 245, 242, 0.85);
-    --ob-backlight: rgba(194, 61, 6, 0.22);
+    --ob-line: rgba(11, 20, 18, 0.09);
+    --ob-line-hover: rgba(15, 138, 109, 0.45);
+    --ob-grid-line: rgba(11, 20, 18, 0.045);
+    --ob-glow: rgba(15, 138, 109, 0.06);
+    --ob-reticle: rgba(11, 20, 18, 0.18);
+    --ob-glass: rgba(244, 247, 245, 0.85);
+    --ob-backlight: rgba(15, 138, 109, 0.22);
     --ob-card-shadow:
-      0 10px 30px -10px rgba(20, 20, 20, 0.06), 0 1px 3px rgba(20, 20, 20, 0.04);
+      0 10px 30px -10px rgba(11, 20, 18, 0.06), 0 1px 3px rgba(11, 20, 18, 0.04);
   }
 
   :root[data-theme="dark"] {
-    --ob-bg: #0a0a0a;
-    --ob-surface: #161616;
-    --ob-surface-2: #1e1e1e;
-    --ob-text: #f5f5f3;
-    --ob-muted: #9a9a98;
-    --ob-meta: #6e6e6c;
-    --ob-accent: #f2600c;
-    --ob-accent-hover: #ff7a33;
-    --ob-on-accent: #0a0a0a;
+    --ob-bg: #090d0c;
+    --ob-surface: #111716;
+    --ob-surface-2: #161e1c;
+    --ob-text: #f4f7f6;
+    --ob-muted: #8e9d99;
+    --ob-meta: #5c6b67;
+    --ob-accent: #149e7e;
+    --ob-accent-hover: #19b591;
+    --ob-on-accent: #07120f;
     --ob-line: rgba(255, 255, 255, 0.08);
-    --ob-line-hover: rgba(242, 96, 12, 0.45);
+    --ob-line-hover: rgba(20, 158, 126, 0.45);
     --ob-grid-line: rgba(255, 255, 255, 0.03);
-    --ob-glow: rgba(242, 96, 12, 0.08);
+    --ob-glow: rgba(20, 158, 126, 0.08);
     --ob-reticle: rgba(255, 255, 255, 0.18);
-    --ob-glass: rgba(10, 10, 10, 0.85);
-    --ob-backlight: rgba(242, 96, 12, 0.38);
+    --ob-glass: rgba(9, 13, 12, 0.85);
+    --ob-backlight: rgba(20, 158, 126, 0.38);
     --ob-card-shadow: none;
   }
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme]) {
-      --ob-bg: #0a0a0a;
-      --ob-surface: #161616;
-      --ob-surface-2: #1e1e1e;
-      --ob-text: #f5f5f3;
-      --ob-muted: #9a9a98;
-      --ob-meta: #6e6e6c;
-      --ob-accent: #f2600c;
-      --ob-accent-hover: #ff7a33;
-      --ob-on-accent: #0a0a0a;
+      --ob-bg: #090d0c;
+      --ob-surface: #111716;
+      --ob-surface-2: #161e1c;
+      --ob-text: #f4f7f6;
+      --ob-muted: #8e9d99;
+      --ob-meta: #5c6b67;
+      --ob-accent: #149e7e;
+      --ob-accent-hover: #19b591;
+      --ob-on-accent: #07120f;
       --ob-line: rgba(255, 255, 255, 0.08);
-      --ob-line-hover: rgba(242, 96, 12, 0.45);
+      --ob-line-hover: rgba(20, 158, 126, 0.45);
       --ob-grid-line: rgba(255, 255, 255, 0.03);
-      --ob-glow: rgba(242, 96, 12, 0.08);
+      --ob-glow: rgba(20, 158, 126, 0.08);
       --ob-reticle: rgba(255, 255, 255, 0.18);
-      --ob-glass: rgba(10, 10, 10, 0.85);
-      --ob-backlight: rgba(242, 96, 12, 0.38);
+      --ob-glass: rgba(9, 13, 12, 0.85);
+      --ob-backlight: rgba(20, 158, 126, 0.38);
       --ob-card-shadow: none;
     }
   }
@@ -448,22 +448,22 @@
   animation: drawer-slide-in 420ms var(--ob-ease, cubic-bezier(0.16, 1, 0.3, 1)) both;
 }
 
-/* About page, dark mode: a deeper near-black canvas and a slightly brighter orange. */
+/* About page, dark mode: a deeper charcoal canvas and a slightly cooler emerald. */
 @utility about-obsidian {
   :root[data-theme="dark"] & {
-    --ob-bg: #050505;
-    --ob-surface: #0d0d0d;
-    --ob-surface-2: #121212;
-    --ob-text: #f5f5f3;
-    --ob-muted: #9a9a98;
-    --ob-meta: #6e6e6c;
-    --ob-accent: #ff5a1f;
-    --ob-accent-hover: #ff8552;
-    --ob-on-accent: #050505;
+    --ob-bg: #060908;
+    --ob-surface: #0c1210;
+    --ob-surface-2: #0f1613;
+    --ob-text: #f3f4f6;
+    --ob-muted: #9ca3af;
+    --ob-meta: #6b7280;
+    --ob-accent: #10b981;
+    --ob-accent-hover: #34d399;
+    --ob-on-accent: #060908;
     --ob-line: rgba(255, 255, 255, 0.07);
-    --ob-line-hover: rgba(255, 90, 31, 0.35);
+    --ob-line-hover: rgba(16, 185, 129, 0.35);
     --ob-grid-line: rgba(255, 255, 255, 0.03);
-    --ob-glow: rgba(255, 90, 31, 0.08);
-    --ob-backlight: rgba(255, 90, 31, 0.3);
+    --ob-glow: rgba(16, 185, 129, 0.08);
+    --ob-backlight: rgba(16, 185, 129, 0.3);
   }
 }
