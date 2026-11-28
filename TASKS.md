@@ -165,6 +165,11 @@ Skills used: `frontend-design`'s system (no new visual style), `web-design-guide
 - [x] Verified: `npm run lint`, `npx tsc --noEmit`, `npm run build` all pass. Headless-Chrome screenshots of Home, About, Projects, Skills and Contact in both light and dark confirmed the new palette renders consistently sitewide with no console errors and no horizontal overflow.
 - [ ] Owner has not yet confirmed the exact orange hex sampled from their reference image is a close enough match (I estimated it visually; I did not have pixel-level color-picker access to the supplied image).
 
+## Expertise page redesign, phase 1 of 2
+- [x] `/skills` rebuilt on Obsidian/Alabaster (hero, telemetry, legend, five sticky domain sections, applied-in links); verified in headless Chrome
+- [ ] Phase 2 of 2 (owner brief pending)
+- [ ] Bottom floating nav from the brief does not exist; owner to confirm whether one is wanted
+
 ## Phase 8: Testing, optimization, deployment prep
 - [ ] Full audit with `web-design-guidelines` across all pages
 - [ ] Performance review with `vercel-react-best-practices` (images, fonts, bundle, client components)

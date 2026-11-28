@@ -15,7 +15,7 @@ import { cn } from "@/lib/utils";
 export function Header() {
   const pathname = usePathname();
   // Pages built on the Obsidian / Alabaster design use the glass bar.
-  const home = pathname === "/" || pathname === "/about" || pathname === "/projects";
+  const home = pathname === "/" || pathname === "/about" || pathname === "/projects" || pathname === "/skills";
 
   return (
     <header

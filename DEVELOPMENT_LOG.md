@@ -383,3 +383,7 @@ The owner asked for color-theme recommendations, explicitly wanting something th
 ### Remains
 - Owner has not explicitly confirmed the sampled orange (`#F2600C` dark / `#C23D06` light) matches their reference image closely enough — I estimated it visually rather than color-picking the actual file.
 - The rest of the open items from Phase 4 and 4.1 (owner content, repo/live URLs, rest-of-site Obsidian migration) are unchanged.
+
+## Expertise page redesign (Obsidian/Alabaster), phase 1 of 2
+
+**Skills used:** `frontend-design`. Rebuilt `/skills` on the Obsidian/Alabaster system: new `src/sections/SkillsHero.tsx` (eyebrow, two-line headline, telemetry computed from data: 5 domains, 47 technologies, 6 projects; legend), rewritten `src/sections/SkillDomains.tsx` (12-column sections, sticky left header from 960px with live technology count, bento card with watermark and corner brackets, emerald-bordered pills for skills named in a project stack via `projectsUsing`, "Applied in" project links), `src/app/skills/page.tsx` wrapped in `ObsidianPage`, Header glass bar on `/skills`. All five domains, all 47 skills and every applied-in link come from `src/data/skills.ts` and the project data; nothing added. The requested bottom floating navigation bar does not exist in the codebase, so nothing was pinned or padded for it. Verified: tsc, lint, build pass; headless Chrome at 1440 and 390px, light and dark, one h1, no overflow, no console errors.
