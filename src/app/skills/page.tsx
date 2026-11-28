@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ObsidianPage } from "@/components/ObsidianPage";
-import { ContactCta } from "@/sections/ContactCta";
+import { AboutCtaBanner } from "@/sections/AboutCtaBanner";
 import { SkillDomains } from "@/sections/SkillDomains";
 import { SkillsHero } from "@/sections/SkillsHero";
 
@@ -17,7 +17,10 @@ export default function SkillsPage() {
     <ObsidianPage>
       <SkillsHero description={description} />
       <SkillDomains />
-      <ContactCta />
+      <AboutCtaBanner
+        primary={{ href: "/experience", label: "Next: View My Experience" }}
+        secondary={{ href: "/contact", label: "Get In Touch" }}
+      />
     </ObsidianPage>
   );
 }

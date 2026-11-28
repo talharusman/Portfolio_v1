@@ -1,6 +1,7 @@
 import { ArrowRight, ArrowUpRight, Mail, Terminal } from "lucide-react";
 import Link from "next/link";
 import { CopyEmailButton } from "@/components/CopyEmailButton";
+import { ProjectBrief } from "@/components/ProjectBrief";
 import { Container } from "@/components/ui/Container";
 import { home } from "@/data/home";
 import { profile } from "@/data/profile";
@@ -12,7 +13,8 @@ const display = (href: string) =>
 const bracket =
   "pointer-events-none absolute size-3 border-(color:--ob-accent) opacity-40 transition-all duration-300 ease-(--ob-ease) group-hover:size-5 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(20,158,126,0.8)]";
 
-export function ContactCta() {
+/** With `briefScopes`, the banner opens the project brief modal instead of linking to /contact. */
+export function ContactCta({ briefScopes }: { briefScopes?: string[] } = {}) {
   const { headline, description } = home.cta;
 
   const contacts = [
@@ -58,6 +60,9 @@ export function ContactCta() {
           </p>
         </div>
 
+        {briefScopes ? (
+          <ProjectBrief scopes={briefScopes} email={profile.email} />
+        ) : (
         <Link
           href="/contact"
           className="group mt-8 flex min-h-24 items-center justify-between gap-4 rounded-xl bg-(--ob-accent) px-5 text-(color:--ob-on-accent) transition-all duration-300 ease-(--ob-ease) hover:-translate-y-1 hover:shadow-[0_18px_40px_-18px_rgba(20,158,126,0.7)] sm:min-h-28 sm:px-8"
@@ -78,6 +83,7 @@ export function ContactCta() {
             <ArrowRight className="size-5 transition-transform duration-300 ease-(--ob-ease) group-hover:-rotate-45" />
           </span>
         </Link>
+        )}
 
         <ul className="mt-4 grid gap-4 lg:grid-cols-3">
           {contacts.map(({ label, value, href, icon, external }) => (

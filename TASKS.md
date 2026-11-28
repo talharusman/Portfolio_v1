@@ -167,7 +167,7 @@ Skills used: `frontend-design`'s system (no new visual style), `web-design-guide
 
 ## Expertise page redesign, phase 1 of 2
 - [x] `/skills` rebuilt on Obsidian/Alabaster (hero, telemetry, legend, five sticky domain sections, applied-in links); verified in headless Chrome
-- [ ] Phase 2 of 2 (owner brief pending)
+- [x] Phase 2 of 2: project filter matrix, technology inspector, project brief modal on the real contact action (verified in headless Chrome; a real successful send not tested)
 - [ ] Bottom floating nav from the brief does not exist; owner to confirm whether one is wanted
 
 ## Phase 8: Testing, optimization, deployment prep

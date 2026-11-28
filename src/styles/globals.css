@@ -448,6 +448,22 @@
   animation: drawer-slide-in 420ms var(--ob-ease, cubic-bezier(0.16, 1, 0.3, 1)) both;
 }
 
+/* Technology inspector: rises from the bottom edge when a technology is selected. */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 16px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@utility inspector-in {
+  animation: rise-in 360ms var(--ob-ease, cubic-bezier(0.16, 1, 0.3, 1)) both;
+}
+
 /* About page, dark mode: a deeper charcoal canvas and a slightly cooler emerald. */
 @utility about-obsidian {
   :root[data-theme="dark"] & {
