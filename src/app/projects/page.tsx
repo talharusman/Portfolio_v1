@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { ObsidianPage } from "@/components/ObsidianPage";
 import { projects } from "@/data/projects";
-import { ContactCta } from "@/sections/ContactCta";
+import { AboutCtaBanner } from "@/sections/AboutCtaBanner";
 import { FilteredProjectsExplorer } from "@/sections/FilteredProjectsExplorer";
 import { ProjectsExplorer } from "@/sections/ProjectsExplorer";
 import { ProjectsHero } from "@/sections/ProjectsHero";
@@ -21,7 +21,10 @@ export default function ProjectsPage(props: PageProps<"/projects">) {
       <Suspense fallback={<ProjectsExplorer projects={projects} initialCategory="all" />}>
         <FilteredProjectsExplorer searchParams={props.searchParams} />
       </Suspense>
-      <ContactCta />
+      <AboutCtaBanner
+        primary={{ href: "/skills", label: "Next: Explore My Expertise" }}
+        secondary={{ href: "/contact", label: "Get In Touch" }}
+      />
     </ObsidianPage>
   );
 }
